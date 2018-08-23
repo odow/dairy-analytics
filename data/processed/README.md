@@ -3,7 +3,7 @@
 The files within this directory contain forecasts made my third-parties of the
 Fonterra farmgate milk price.
 
- - `agrihq.csv`: forecasts made by the seasonal version of the AgriHQ farmgate
+ - `agrihq.json`: forecasts made by the seasonal version of the AgriHQ farmgate
     milk price calculator. https://agrihq.co.nz/toolbox/farmgate-milk-price-calculator
     Some historical data obtained by personal correspondence with Susan Kilsby.
  - `asb.csv`: forecasts made by ASB and published in the Rural Economic Note
