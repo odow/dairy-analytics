@@ -1,1 +1,88 @@
-dairyanalytics.co.nz
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>Dairy Analytics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
+    <link href="style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="forecasts.json" type="text/javascript"></script>
+    <script>
+        (function(i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function() {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-82305228-1', 'auto');
+        ga('send', 'pageview');
+    </script>
+</head>
+
+<body>
+    <nav class="white" role="navigation">
+        <div class="nav-wrapper container">
+            <a id="logo-container" href="index.html" class="brand-logo"><div class="valign-wrapper light-blue-text text-darken-4" height=40px>Dairy Analytics</div></a>
+        </div>
+    </nav>
+
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="col s12 m12 l8 flow-text container">
+            <div class="container">
+                <h4><b>Forecasting the <span class="light-blue-text text-darken-4">2018/19</span> Fonterra Milk Price</b></h4>
+                <p class="subtitle mono">Last Updated: <span id="last_updated"></span></p>
+                <div class="divider"></div>
+                <h5>Our current forecast</h5>
+                <p class="small-text">We think there is a 4-in-5 chance that the milk price will end up between</p>
+                <div class="center">
+                    <h2 class="light-blue-text text-darken-4">$<span id="lower_estimate"></span><span class="grey-text">/90</span> and $<span id="upper_estimate"></span><span class="grey-text">/10</span></h2>
+                </div>
+                <p class="small-text">but if you tried to pin us down, our best guess is</p>
+                <div class="center">
+                    <h2 class="light-blue-text text-darken-4">$<span id="best_estimate"></span><span class="grey-text">/50</span></h2>
+                </div>
+                <p class="subtitle"><b>Help! What do the grey slash things mean?</b></p>
+                <p class="subtitle">When we give a forecast like <b><span
+                class="light-blue-text text-darken-4">$6.00</span><span
+                class="grey-text">/90</span></b>, the <span
+                class="grey-text"><b>grey</b></span> number after the slash is
+                    the probability that the final Fonterra farmgate milk price
+                    will be greater than the <span
+                    class="light-blue-text text-darken-4"><b>blue</b></span> dollar figure.</p>
+                <div class="divider"></div>
+                <h5>How our forecast has changed over time</h5>
+                <p class="subtitle">The dark, solid line is our <i>best
+                guess</i>. There is a 4-in-5 chance that the final milk price
+                    will end up in the shaded band.</p>
+                <div>
+                    <div id="forecast_chart"></div>
+                </div>
+
+                <div class="divider"></div>
+                <h5>About</h5>
+                <p class="small-text"><b><a href="https://github.com/odow">Oscar Dowson</a></b> has
+                    a PhD in Engineering Science from the University of
+                    Auckland. He is now a Postdoctoral fellow at Northwestern
+                    University.</p>
+                <p class="small-text">Got some comments? Send an email to
+                    <a href="mailto:oscar@dairyanalytics.co.nz"><u>oscar@dairyanalytics.co.nz</u></a>.</p>
+                <p class="small-text">Did we mention that you should
+                    <a href="https://goo.gl/forms/lEpU76hfftDMEQyN2"><u>sign up</u></a>
+                    for updates whenever we publish a new forecast?</p>
+                <div class="divider"></div>
+                <p class="subtitle">Made by <a href="http://materializecss.com">Materialize</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="forecasts.js" type="text/javascript"></script>
+</body>
+
+</html>

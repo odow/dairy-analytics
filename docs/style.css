@@ -1,0 +1,17 @@
+.serif {
+    font-family: serif
+}
+.mono {
+    font-family: monospace
+}
+.subtitle{
+    font-size: 1rem;
+}
+
+.small-text{
+    font-size: 1.25rem;
+}
+
+a {
+    color: #01579b
+}

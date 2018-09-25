@@ -1,6 +1,4 @@
 .ipynb_checkpoints
 */.ipynb_checkpoints
-data/old_data
-data/raw/westpac/*.pdf
-data/raw/nzx/*.csv
+data/*
 *.pyc
