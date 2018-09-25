@@ -14,13 +14,6 @@ function load_json(filename, callback) {
     xml_request.send(null);
 }
 
-// function init() {
-//     loadJSON(function(response) {
-//         // Parse JSON string into object
-//         var actual_JSON = JSON.parse(response);
-//     });
-// }
-
 function first(x) {
     return x[0]
 }
@@ -128,14 +121,13 @@ function get_layout_options(forecasts) {
     }
 }
 
-function gdt_events_line(gdt_events, key, name, colour) {
+function gdt_events_line(gdt_events, key, name) {
     return {
         x: gdt_events['date'],
         y: gdt_events[key],
         name: name,
         type: 'scatter',
         line: {
-            // color: colour,
             shape: 'hv'
         }
     }
@@ -181,11 +173,11 @@ function gdt_events_layout() {
             width: '100%'
         }).node();
         Plotly.plot(gdt_events_chart, [
-                gdt_events_line(gdt_events, 'amf', 'AMF', "rgba(1, 87, 155, 1)"),
-                gdt_events_line(gdt_events, 'bmp', 'BMP', "rgba(1, 87, 155, 1)"),
-                gdt_events_line(gdt_events, 'but', 'BUT', "rgba(1, 87, 155, 1)"),
-                gdt_events_line(gdt_events, 'smp', 'SMP', "rgba(1, 87, 155, 1)"),
-                gdt_events_line(gdt_events, 'wmp', 'WMP', "rgba(1, 87, 155, 1)")
+                gdt_events_line(gdt_events, 'amf', 'AMF'),
+                gdt_events_line(gdt_events, 'bmp', 'BMP'),
+                gdt_events_line(gdt_events, 'but', 'BUT'),
+                gdt_events_line(gdt_events, 'smp', 'SMP'),
+                gdt_events_line(gdt_events, 'wmp', 'WMP')
             ],
             gdt_events_layout()
         );
