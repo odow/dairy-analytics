@@ -8,7 +8,7 @@ function load_json(filename, callback) {
         if (xml_request.readyState == 4 && xml_request.status == "200") {
             // Required use of an anonymous callback as .open will NOT return a
             // value but simply returns undefined in asynchronous mode
-            callback(xml_request.responseText);
+            callback(JSON.parse(xml_request.responseText));
         }
     };
     xml_request.send(null);
@@ -34,60 +34,67 @@ function set_textual_forecast(forecasts) {
 }
 
 function key_from_series(data, key) {
+    // Given data in the form: `data = [{'key': value1}, {'key': value2} ...]`,
+    //return `[value1, value2, ...]`.
     return data.map(function(d) {
         return d[key]
     })
 }
 
-function line_plot(forecasts, key, colour, name) {
-    var x = key_from_series(forecasts, 'date')
-    var y = key_from_series(forecasts, key)
-    x.push(Date.now())
-    y.push(last(forecasts)[key])
+function default_line_series(x, y, name) {
     return {
         x: x,
         y: y,
         name: name,
         type: 'scatter',
         line: {
-            color: colour,
             shape: 'hv'
         }
     }
 }
 
-function ribbon_plot(forecasts, lower, upper, colour, name) {
+function forecast_median_series(forecasts) {
+    var x = key_from_series(forecasts, 'date')
+    var y = key_from_series(forecasts, '50%')
+    x.push(Date.now())
+    y.push(last(forecasts)['50%'])
+    series = default_line_series(x, y, 'Best Guess')
+    series['line']['color'] = '#01579b'
+    return series
+}
+
+function forecast_ribbon_series(forecasts) {
     var x = []
     var y = []
     // For a ribbon plot, we need to go along the bottom, ...
     for (i = 0; i < forecasts.length - 1; i++) {
         x.push(forecasts[i]["date"])
         x.push(forecasts[i + 1]["date"])
-        y.push(forecasts[i][lower])
-        y.push(forecasts[i][lower])
+        y.push(forecasts[i]['10%'])
+        y.push(forecasts[i]['10%'])
     }
     // ... then loop up along the right-hand edge, ...
     x.push(Date.now())
     x.push(Date.now())
-    y.push(last(forecasts)[lower])
-    y.push(last(forecasts)[upper])
+    y.push(last(forecasts)['10%'])
+    y.push(last(forecasts)['90%'])
     // ... head back along the top, ...
     for (i = forecasts.length - 1; i > 0; i--) {
         x.push(forecasts[i]["date"])
         x.push(forecasts[i - 1]["date"])
-        y.push(forecasts[i][upper])
-        y.push(forecasts[i - 1][upper])
+        y.push(forecasts[i]['90%'])
+        y.push(forecasts[i - 1]['90%'])
     }
     // ... and finally back down to the start.
     x.push(forecasts[0]["date"])
-    y.push(forecasts[0][lower])
+    y.push(forecasts[0]['10%'])
     return {
         x: x,
         y: y,
-        name: name,
+        name: '4-in-5 Range',
         type: 'scatter',
         fill: 'tozerox',
-        fillcolor: colour,
+        fillcolor: '#01579b50',
         line: {
             color: "transparent",
             shape: 'vh'
@@ -95,125 +102,76 @@ function ribbon_plot(forecasts, lower, upper, colour, name) {
     }
 }
 
-function gdt_events_line(gdt_events, key, name) {
+function default_layout(y_axis_title) {
     return {
-        x: gdt_events['date'],
-        y: gdt_events[key],
-        name: name,
-        type: 'scatter',
-        line: {
-            shape: 'hv'
-        }
+        hovermode: 'closest',
+        yaxis: {
+            title: y_axis_title,
+            tickprefix: "$",
+            titlefont: {
+                family: 'Verdana, National, sans-serif',
+            }
+        },
+        margin: {
+            r: 0,
+            t: 20
+        },
+        showLegend: false
     }
 }
 
-function fonterra_json_to_line(fonterra_json, key) {
-    return {
-        x: key_from_series(fonterra_json[key], 'date'),
-        y: key_from_series(fonterra_json[key], 'forecast'),
-        name: key,
-        type: 'scatter',
-        line: {
-            shape: 'hv'
-        }
-    }
-}
 (function() {
     var charts = []
     /* =========================================================================
         Plot forecasts by dairyanalytics this season.
     ========================================================================= */
-    load_json('forecasts.json', function(response) {
-        var forecasts = JSON.parse(response)
-        set_textual_forecast(forecasts)
-        var forecast_chart = d3.select('#forecast_chart').append('div').style({
-            width: '100%'
-        }).node();
-        var first_date = first(forecasts)["date"]
+    load_json('forecasts.json', function(forecast_json) {
+        set_textual_forecast(forecast_json)
+        var forecast_chart = d3.select('#forecast_chart').node()
+        var first_date = first(forecast_json)["date"]
         var final_date = (parseInt(first_date.slice(0, 4)) + 1).toString() + "-09-30"
+        var layout = default_layout('Milk Price (NZD/kgMS)')
+        layout['xaxis'] = {
+            range: [first_date, final_date]
+        }
+        layout['yaxis']['range'] = [3, 9]
         Plotly.plot(forecast_chart, [
-            ribbon_plot(forecasts, "10%", "90%", "rgba(1, 87, 155, 0.25)", "4-in-5 Range"),
-            line_plot(forecasts, "50%", "rgba(1, 87, 155, 1)", "Best Guess")
-        ], {
-            hovermode: 'closest',
-            xaxis: {
-                range: [first_date, final_date]
-            },
-            yaxis: {
-                title: 'Milk Price ($/kgMS)',
-                range: [3, 9],
-                tickprefix: "$",
-                titlefont: {
-                    family: 'Verdana, National, sans-serif',
-                }
-            },
-            margin: {
-                r: 0,
-                t: 20
-            },
-            showLegend: false
-        });
+            forecast_ribbon_series(forecast_json),
+            forecast_median_series(forecast_json)
+        ], layout);
         charts.push(forecast_chart)
     })
     /* =========================================================================
         Plot historical Fonterra forecasts.
     ========================================================================= */
-    load_json('fonterra_forecasts.json', function(response) {
-        var fonterra_json = JSON.parse(response)
-        var fonterra_chart = d3.select('#fonterra_chart').append('div').style({
-            width: '100%'
-        }).node();
-        Plotly.plot(
-            fonterra_chart,
+    load_json('fonterra_forecasts.json', function(fonterra_json) {
+        var fonterra_chart = d3.select('#fonterra_chart').node()
+        Plotly.plot(fonterra_chart,
             Object.keys(fonterra_json).map(function(key, index) {
-                return fonterra_json_to_line(fonterra_json, key)
-            }), {
-                hovermode: 'closest',
-                yaxis: {
-                    title: 'Milk Price (NZD/kgMS)',
-                    tickprefix: "$",
-                    titlefont: {
-                        family: 'Verdana, National, sans-serif',
-                    }
-                },
-                margin: {
-                    r: 0,
-                    t: 20
-                },
-                showLegend: false
-            });
+                return default_line_series(
+                    key_from_series(fonterra_json[key], 'date'),
+                    key_from_series(fonterra_json[key], 'forecast'),
+                    key
+                )
+            }),
+            default_layout('Milk Price (NZD/kgMS)'));
         charts.push(fonterra_chart)
     })
     /* =========================================================================
         Plot historical GDT events.
     ========================================================================= */
-    load_json('gdt_events.json', function(response) {
-        var gdt_events = JSON.parse(response)
-        var gdt_events_chart = d3.select('#gdt_events_chart').append('div').style({
-            width: '100%'
-        }).node();
-        Plotly.plot(gdt_events_chart, [
-            gdt_events_line(gdt_events, 'amf', 'AMF'),
-            gdt_events_line(gdt_events, 'bmp', 'BMP'),
-            gdt_events_line(gdt_events, 'but', 'BUT'),
-            gdt_events_line(gdt_events, 'smp', 'SMP'),
-            gdt_events_line(gdt_events, 'wmp', 'WMP')
-        ], {
-            hovermode: 'closest',
-            yaxis: {
-                title: 'Price (USD/tonne)',
-                tickprefix: "$",
-                titlefont: {
-                    family: 'Verdana, National, sans-serif',
-                }
-            },
-            margin: {
-                r: 0,
-                t: 20
-            },
-            showLegend: false
-        });
-        charts.push(gdt_events_chart)
+    load_json('gdt_events.json', function(gdt_json) {
+        var gdt_chart = d3.select('#gdt_events_chart').node()
+        var layout = default_layout('Price(USD / tonne')
+        layout['hovermode'] = 'compare'
+        Plotly.plot(gdt_chart, [
+            default_line_series(gdt_json['date'], gdt_json['amf'], 'AMF'),
+            default_line_series(gdt_json['date'], gdt_json['bmp'], 'BMP'),
+            default_line_series(gdt_json['date'], gdt_json['but'], 'BUT'),
+            default_line_series(gdt_json['date'], gdt_json['smp'], 'SMP'),
+            default_line_series(gdt_json['date'], gdt_json['wmp'], 'WMP')
+        ], layout);
+        charts.push(gdt_chart)
     })
     /* =========================================================================
         Resizing stuff.
