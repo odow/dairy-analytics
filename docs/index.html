@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css">
     <link href="style.css" type="text/css" rel="stylesheet" media="screen,projection" />
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="forecasts.json" type="text/javascript"></script>
+    <!-- <script src="forecasts.json" type="text/javascript"></script> -->
     <script>
         (function(i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
@@ -65,7 +65,17 @@
                 <div>
                     <div id="forecast_chart"></div>
                 </div>
-
+                <div class="divider"></div>
+                <h5>GlobalDairyTrade auction prices</h5>
+                <p class="subtitle">We use auction prices from
+                    <a href="https://www.globaldairytrade.info/en/product-results/">GlobalDairyTrade</a>
+                    to help forecast the milk price. The prices below are not
+                    identical to those published by GlobalDairyTrade; in
+                    auctions where the product was not sold, or the price was
+                    not published, we have <i>imputed</i> a value.</p>
+                <div>
+                    <div id="gdt_events_chart"></div>
+                </div>
                 <div class="divider"></div>
                 <h5>About</h5>
                 <p class="small-text"><b><a href="https://github.com/odow">Oscar Dowson</a></b> has

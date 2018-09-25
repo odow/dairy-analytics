@@ -1,5 +1,26 @@
 var d3 = Plotly.d3;
 
+function load_json(filename, callback) {
+    var xml_request = new XMLHttpRequest();
+    xml_request.overrideMimeType("application/json");
+    xml_request.open('GET', filename, true);
+    xml_request.onreadystatechange = function() {
+        if (xml_request.readyState == 4 && xml_request.status == "200") {
+            // Required use of an anonymous callback as .open will NOT return a
+            // value but simply returns undefined in asynchronous mode
+            callback(xml_request.responseText);
+        }
+    };
+    xml_request.send(null);
+}
+
+// function init() {
+//     loadJSON(function(response) {
+//         // Parse JSON string into object
+//         var actual_JSON = JSON.parse(response);
+//     });
+// }
+
 function first(x) {
     return x[0]
 }
@@ -107,20 +128,72 @@ function get_layout_options(forecasts) {
     }
 }
 
+function gdt_events_line(gdt_events, key, name, colour) {
+    return {
+        x: gdt_events['date'],
+        y: gdt_events[key],
+        name: name,
+        type: 'scatter',
+        line: {
+            // color: colour,
+            shape: 'hv'
+        }
+    }
+}
+
+function gdt_events_layout() {
+    return {
+        hovermode: 'closest',
+        yaxis: {
+            title: 'Price (USD/tonne)',
+            tickprefix: "$",
+            titlefont: {
+                family: 'Verdana, National, sans-serif',
+            }
+        },
+        margin: {
+            r: 0,
+            t: 20
+        },
+        showLegend: false
+    }
+}
+
 (function() {
-    var forecasts = season_2018_19
-    set_textual_forecast(forecasts)
-    var forecast_chart = d3.select('#forecast_chart').append('div').style({
-        width: '100%'
-    }).node();
-    forecasts
-    Plotly.plot(forecast_chart, [
-            ribbon_plot(forecasts, "10%", "90%", "rgba(1, 87, 155, 0.25)", "4-in-5 Range"),
-            line_plot(forecasts, "50%", "rgba(1, 87, 155, 1)", "Best Guess")
-        ],
-        get_layout_options(forecasts)
-    );
+    var charts = []
+    load_json('forecasts.json', function(response) {
+        var forecasts = JSON.parse(response)
+        set_textual_forecast(forecasts)
+        var forecast_chart = d3.select('#forecast_chart').append('div').style({
+            width: '100%'
+        }).node();
+        Plotly.plot(forecast_chart, [
+                ribbon_plot(forecasts, "10%", "90%", "rgba(1, 87, 155, 0.25)", "4-in-5 Range"),
+                line_plot(forecasts, "50%", "rgba(1, 87, 155, 1)", "Best Guess")
+            ],
+            get_layout_options(forecasts)
+        );
+        charts.push(forecast_chart)
+    })
+    load_json('gdt_events.json', function(response) {
+        var gdt_events = JSON.parse(response)
+        var gdt_events_chart = d3.select('#gdt_events_chart').append('div').style({
+            width: '100%'
+        }).node();
+        Plotly.plot(gdt_events_chart, [
+                gdt_events_line(gdt_events, 'amf', 'AMF', "rgba(1, 87, 155, 1)"),
+                gdt_events_line(gdt_events, 'bmp', 'BMP', "rgba(1, 87, 155, 1)"),
+                gdt_events_line(gdt_events, 'but', 'BUT', "rgba(1, 87, 155, 1)"),
+                gdt_events_line(gdt_events, 'smp', 'SMP', "rgba(1, 87, 155, 1)"),
+                gdt_events_line(gdt_events, 'wmp', 'WMP', "rgba(1, 87, 155, 1)")
+            ],
+            gdt_events_layout()
+        );
+        charts.push(gdt_events_chart)
+    })
     window.onresize = function() {
-        Plotly.Plots.resize(forecast_chart)
+        charts.map(function(chart) {
+            Plotly.Plots.resize(chart)
+        })
     };
 })();

@@ -8,6 +8,14 @@ MODELS = 'data\\models\\'
 import datetime, io, json, numpy, os, pandas, requests, statsmodels.api
 import traceback
 
+def gdt_events_to_json():
+    data = pandas.read_csv(PROCESSED_DATA + 'gdt_events.csv')
+    with open('docs\\gdt_events.json', 'w') as io:
+        output = {}
+        for key in ['date', 'amf', 'bmp', 'but', 'smp', 'wmp']:
+            output[key] = data[key].tolist()
+        json.dump(output, io)
+
 # To rebuild the GDT dataset, run this script:
 #
 # response = requests.get('https://s3.amazonaws.com/' + \
@@ -268,8 +276,7 @@ def simulate_model(run_date):
             '90%': round(numpy.percentile(nzd_earnings, 90), 2)
         })
     with open('docs\\forecasts.json', 'w') as io:
-        io.write('season_2018_19 = ')
-        io.write(json.dumps(forecasts))
+        json.dump(forecasts, io)
     return
 
 def get_last_error():
