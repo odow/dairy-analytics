@@ -233,7 +233,7 @@ def simulate_model(run_date):
     sales_curve = get_average_sales_curve()
     product_mix = get_product_mix()
 
-    number_simulations = 20_000
+    number_simulations = 20000
     nzd_earnings = []
     usd_simulations = []
     fx_simulations = []
