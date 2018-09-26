@@ -1,16 +1,16 @@
 MODEL_VERSION = 1
 
-RAW_GDT_DATA = 'data\\raw\\gdt\\'
-RAW_FONTERRA_DATA = 'data\\raw\\fonterra\\'
-PROCESSED_DATA = 'data\\processed\\'
-MODELS = 'data\\models\\'
+RAW_GDT_DATA = 'data/raw/gdt/'
+RAW_FONTERRA_DATA = 'data/raw/fonterra/'
+PROCESSED_DATA = 'data/processed/'
+MODELS = 'data/models/'
 
 import datetime, io, json, numpy, os, pandas, requests, statsmodels.api
 import traceback
 
 def gdt_events_to_json():
     data = pandas.read_csv(PROCESSED_DATA + 'gdt_events.csv')
-    with open('docs\\gdt_events.json', 'w') as io:
+    with open('docs/gdt_events.json', 'w') as io:
         output = {}
         for key in ['date', 'amf', 'bmp', 'but', 'smp', 'wmp']:
             output[key] = data[key].tolist()
@@ -265,7 +265,7 @@ def simulate_model(run_date):
             'cost_simulations': cost_simulations,
             'nzd_earnings': nzd_earnings
         }, io)
-    with open('docs\\forecasts.json', 'r') as io:
+    with open('docs/forecasts.json', 'r') as io:
         json_str = io.read()
         forecasts = json.loads(json_str[json_str.find('['):])
         forecasts.append({
@@ -275,7 +275,7 @@ def simulate_model(run_date):
             '50%': round(numpy.percentile(nzd_earnings, 50), 2),
             '90%': round(numpy.percentile(nzd_earnings, 90), 2)
         })
-    with open('docs\\forecasts.json', 'w') as io:
+    with open('docs/forecasts.json', 'w') as io:
         json.dump(forecasts, io)
     return
 
