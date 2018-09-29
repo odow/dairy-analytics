@@ -1,4 +1,5 @@
-import datetime, dateutil, json, os, re, requests
+import datetime, io, json, os, re, requests, traceback
+import dateutil.parser
 from bs4 import BeautifulSoup
 
 def get_raw_agrihq():
@@ -16,7 +17,7 @@ def get_raw_agrihq():
     calculations = response.json()['calculations']
     effective_date = dateutil.parser.parse(
         calculations[0]['effective_at']).strftime('%Y-%m-%d')
-    filename = 'data/agrihq/' + effective_date + '.json'
+    filename = 'data/raw/agrihq/' + effective_date + '.json'
     if os.path.isfile(filename):
         return False
     else:
@@ -32,7 +33,7 @@ def get_nzx_daily_settlements():
     for link in soup.find_all('a'):
         if link.text == 'Final':
             url = link.get('href')
-            filename = 'data/nzx/' + url.split('/')[-1]
+            filename = 'data/raw/nzx/' + url.split('/')[-1]
             if not os.path.isfile(filename):
                 with open(filename, 'w') as file:
                     csv_response = requests.get(url)
