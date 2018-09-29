@@ -7,8 +7,7 @@ cd ~/dairy-analytics
 git pull
 
 # The scripts to run.
-# python3 src/data/scrape_raw_data.py
-# python3 src/data/process_raw_data.py
+python3 src/scrape_data.py >> 'docs/log.txt'
 python3 src/model.py >> 'docs/log.txt'
 
 # Push any changes to Github.
