@@ -1,7 +1,7 @@
 #! /bin/bash
 
 # cd to dairy-analytics/
-cd ..
+cd ~/dairy-analytics
 
 # Pull any updates from git.
 git pull
