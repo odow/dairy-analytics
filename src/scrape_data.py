@@ -1,4 +1,5 @@
 import datetime, dateutil, json, os, re, requests
+from bs4 import BeautifulSoup
 
 def get_raw_agrihq():
     """
@@ -23,6 +24,22 @@ def get_raw_agrihq():
             json.dump(calculations, file, indent=2)
     return True
 
+def get_nzx_daily_settlements():
+    response = requests.get(
+        'https://www.nzx.com/markets/nzx-dairy-derivatives/market-information')
+    soup = BeautifulSoup(response.text, 'html.parser')
+    found_new_data = False
+    for link in soup.find_all('a'):
+        if link.text == 'Final':
+            url = link.get('href')
+            filename = 'data/nzx/' + url.split('/')[-1]
+            if not os.path.isfile(filename):
+                with open(filename, 'w') as file:
+                    csv_response = requests.get(url)
+                    file.write(csv_response.text)
+                    found_new_data = True
+    return found_new_data
+
 def get_last_error():
     body = 'Error during run. Please see the error below: ' + '\n'
     with io.StringIO() as string_buffer:
@@ -36,8 +53,7 @@ if __name__ == "__main__":
     try:
         if get_raw_agrihq():
             print('New data for AgriHQ.')
-        else:
-            print('Nothing to be done.')
+        if get_nzx_daily_settlements():
+            print('New data for NZX futures.')
     except:
         print(get_last_error())
-    print('-------------------------------------------------------------------')
