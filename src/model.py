@@ -14,7 +14,7 @@ def gdt_events_to_json():
         output = {}
         for key in ['date', 'amf', 'bmp', 'but', 'smp', 'wmp']:
             output[key] = data[key].tolist()
-        json.dump(output, io)
+        json.dump(output, io, indent=2)
 
 # To rebuild the GDT dataset, run this script:
 #
@@ -276,7 +276,7 @@ def simulate_model(run_date):
             '90%': round(numpy.percentile(nzd_earnings, 90), 2)
         })
     with open('docs/forecasts.json', 'w') as io:
-        json.dump(forecasts, io)
+        json.dump(forecasts, io, indent=2)
     return
 
 def get_last_error():
@@ -297,6 +297,8 @@ if __name__ == "__main__":
             rebuild_processed_gdt_events()
             print('... imputing missing data ...')
             impute_missing_gdt_events()
+            print('... writing to file ...')
+            get_events_to_json()
             print('... calculating sales curve ...')
             calculate_average_sales_curve()
             print('... calculating product mix ...')
