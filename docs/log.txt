@@ -40,3 +40,9 @@ Kicking off automatic updater: 2018-10-01
 Updating dataset
 Nothing to be done.
 -------------------------------------------------------------------
+Kicking off data scraper: 2018-10-02
+New data for NZX futures.
+Kicking off automatic updater: 2018-10-02
+Updating dataset
+Nothing to be done.
+-------------------------------------------------------------------
