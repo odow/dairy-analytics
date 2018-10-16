@@ -131,3 +131,9 @@ Kicking off automatic updater: 2018-10-15
 Updating dataset
 Nothing to be done.
 -------------------------------------------------------------------
+Kicking off data scraper: 2018-10-16
+Kicking off automatic updater: 2018-10-16
+Updating dataset
+... rebuilding events.csv ...
+... imputing missing data ...
+... writing to file ...
