@@ -298,7 +298,7 @@ if __name__ == "__main__":
             print('... imputing missing data ...')
             impute_missing_gdt_events()
             print('... writing to file ...')
-            get_events_to_json()
+            gdt_events_to_json()
             print('... calculating sales curve ...')
             calculate_average_sales_curve()
             print('... calculating product mix ...')
