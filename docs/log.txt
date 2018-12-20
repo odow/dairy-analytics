@@ -501,3 +501,8 @@ Kicking off automatic updater: 2018-12-19
 Updating dataset
 Nothing to be done.
 -------------------------------------------------------------------
+Kicking off data scraper: 2018-12-20
+Kicking off automatic updater: 2018-12-20
+Updating dataset
+Nothing to be done.
+-------------------------------------------------------------------
