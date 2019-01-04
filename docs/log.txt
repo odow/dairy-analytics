@@ -569,3 +569,9 @@ Nothing to be done.
 Kicking off data scraper: 2019-01-02
 Kicking off automatic updater: 2019-01-02
 Updating dataset
+Kicking off data scraper: 2019-01-03
+Kicking off data scraper: 2019-01-04
+Kicking off automatic updater: 2019-01-04
+Updating dataset
+Nothing to be done.
+-------------------------------------------------------------------
