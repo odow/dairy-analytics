@@ -575,3 +575,9 @@ Kicking off automatic updater: 2019-01-04
 Updating dataset
 Nothing to be done.
 -------------------------------------------------------------------
+Kicking off data scraper: 2019-01-05
+New data for AgriHQ.
+Kicking off automatic updater: 2019-01-05
+Updating dataset
+Nothing to be done.
+-------------------------------------------------------------------
