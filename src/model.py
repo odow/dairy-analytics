@@ -286,6 +286,22 @@ def get_last_error():
         body += string_buffer.getvalue()
     return body
 
+def update_forecast():
+    get_latest_results()
+    print('... rebuilding events.csv ...')
+    rebuild_processed_gdt_events()
+    print('... imputing missing data ...')
+    impute_missing_gdt_events()
+    print('... writing to file ...')
+    gdt_events_to_json()
+    print('... calculating sales curve ...')
+    calculate_average_sales_curve()
+    print('... calculating product mix ...')
+    calculate_average_product_mix()
+    print('Beginning simulation')
+    todays_date = datetime.datetime.now().strftime('%Y-%m-%d')
+    simulate_model(todays_date)
+    print('Finished simulation.')
 
 if __name__ == "__main__":
     todays_date = datetime.datetime.now().strftime('%Y-%m-%d')
@@ -293,19 +309,7 @@ if __name__ == "__main__":
     try:
         print('Updating dataset')
         if get_latest_results() != None:
-            print('... rebuilding events.csv ...')
-            rebuild_processed_gdt_events()
-            print('... imputing missing data ...')
-            impute_missing_gdt_events()
-            print('... writing to file ...')
-            gdt_events_to_json()
-            print('... calculating sales curve ...')
-            calculate_average_sales_curve()
-            print('... calculating product mix ...')
-            calculate_average_product_mix()
-            print('Beginning simulation')
-            simulate_model(todays_date)
-            print('Finished simulation.')
+            update_forecast()
         else:
             print('Nothing to be done.')
     except:
