@@ -101,12 +101,12 @@ def rebuild_processed_gdt_events():
             else:
                 date = datetime.datetime.strptime(row[1]['date'], '%d/%m/%Y')
                 io.write(str(row[1]['trading_event']) + ',' + date.strftime('%Y-%m-%d'))
-                for key in ['amf', 'bmp', 'but', 'smp', 'smp']:
+                for key in ['amf', 'bmp', 'but', 'smp', 'wmp']:
                     value = row[1][key]
                     if pandas.isnull(value):
                         io.write(',')
                     else:
-                        io.write(',' + str(round(row[1][key])))
+                        io.write(',' + str(round(value)))
                 io.write('\n')
         # Use JSON data for newer trading events.
         for event in event_results:
