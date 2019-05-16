@@ -1283,3 +1283,8 @@ Kicking off automatic updater: 2019-05-15
 Updating dataset
 Nothing to be done.
 -------------------------------------------------------------------
+Kicking off data scraper: 2019-05-16
+Kicking off automatic updater: 2019-05-16
+Updating dataset
+Nothing to be done.
+-------------------------------------------------------------------
