@@ -1323,3 +1323,8 @@ Beginning simulation
 ... writing data ...
 Finished simulation.
 -------------------------------------------------------------------
+Kicking off data scraper: 2019-05-22
+Kicking off automatic updater: 2019-05-22
+Updating dataset
+Nothing to be done.
+-------------------------------------------------------------------
