@@ -232,16 +232,30 @@ def simulate_gdt(model, data, sales_curve, product_mix):
         gdt_value += sales_curve[trading_event - 2] * auction_value
     return gdt_value / 1000, auctions
 
+def load_config():
+    with open('docs/config.json', 'r') as io:
+            return json.load(io)
+
 def simulate_model(run_date):
+    config = load_config()
+    start_date = config["start_date"]
+    estimates = config["estimates"][0]
+    fx_min = estimates["fx_min"]
+    fx_max = estimates["fx_max"]
+    cost_min = estimates["cost_min"]
+    cost_max = estimates["cost_max"]
+    default_prior = estimates["default_prior"]
+    default_prior_weight = estimates["default_prior_weight"]
+
     print('... constructing model ...')
     model, data = construct_gdt_model()
     print('... beginning Monte Carlo ...')
     data = data.drop(['trading_event'], 1)
-    input_data = data[('2018-05-01' <= data.index) & (data.index <= run_date)].values
+    input_data = data[(start_date <= data.index) & (data.index <= run_date)].values
     sales_curve = get_average_sales_curve()
     product_mix = get_product_mix()
 
-    number_simulations = 20000
+    number_simulations = config["num_simulations"]
     nzd_earnings = []
     usd_simulations = []
     fx_simulations = []
@@ -251,11 +265,20 @@ def simulate_model(run_date):
         usd_revenue, auction = simulate_gdt(model, input_data, sales_curve, product_mix)
         auctions.append(auction)
         usd_simulations.append(usd_revenue)
-        FX = numpy.random.uniform(0.655, 0.687)
+        FX = numpy.random.uniform(fx_min, fx_max)
         fx_simulations.append(FX)
-        cost = numpy.random.uniform(1.88, 1.98)
+        cost = numpy.random.uniform(cost_min, cost_max)
         cost_simulations.append(cost)
         nzd_earnings.append(usd_revenue / FX - cost)
+    # Normalize the nzd_earnings by shifing the mean to the weighted default
+    # prior.
+    nzd_mean = numpy.mean(nzd_earnings)
+    print(nzd_mean)
+    new_mean = default_prior_weight * default_prior + \
+        (1 - default_prior_weight) * nzd_mean
+    print(new_mean)
+    for (i, nzd) in enumerate(nzd_earnings):
+        nzd_earnings[i] += (new_mean - nzd_mean)
     print('... finished Monte Carlo ...')
     print('... writing data ...')
     with open(MODELS + run_date + '.json', 'w') as io:

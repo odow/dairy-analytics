@@ -4,11 +4,17 @@ function load_json(filename, callback) {
     var xml_request = new XMLHttpRequest();
     xml_request.overrideMimeType("application/json");
     xml_request.open('GET', filename, true);
+    // xml_request.setRequestHeader("Access-Control-Allow-Origin","*")
     xml_request.onreadystatechange = function() {
-        if (xml_request.readyState == 4 && xml_request.status == "200") {
-            // Required use of an anonymous callback as .open will NOT return a
-            // value but simply returns undefined in asynchronous mode
-            callback(JSON.parse(xml_request.responseText));
+        if (xml_request.readyState == 4) {
+            if (xml_request.status == "200" || xml_request.status == "0") {
+                // Required use of an anonymous callback as .open will NOT return a
+                // value but simply returns undefined in asynchronous mode
+                callback(JSON.parse(xml_request.responseText));
+            } else {
+                console.log("error getting " + filename);
+                console.log(xml_request);
+            }
         }
     };
     xml_request.send(null);
@@ -56,7 +62,8 @@ function default_line_series(x, y, name) {
 function forecast_median_series(forecasts) {
     var x = key_from_series(forecasts, 'date')
     var y = key_from_series(forecasts, '50%')
-    x.push(Date.now())
+    current_date = new Date().toJSON().slice(0, 10)
+    x.push(current_date)
     y.push(last(forecasts)['50%'])
     series = default_line_series(x, y, 'Best Guess')
     series['line']['color'] = '#01579b'
@@ -74,12 +81,13 @@ function forecast_ribbon_series(forecasts) {
         y.push(forecasts[i]['10%'])
     }
     // ... then loop up along the right-hand edge, ...
-    x.push(Date.now())
-    x.push(Date.now())
+    current_date = new Date().toJSON().slice(0, 10)
+    x.push(current_date)
+    x.push(current_date)
     y.push(last(forecasts)['10%'])
     y.push(last(forecasts)['90%'])
     // ... head back along the top, ...
-    for (i = forecasts.length - 1; i > 0; i--) {
+    for (i = forecasts.length-1; i > 0; i--) {
         x.push(forecasts[i]["date"])
         x.push(forecasts[i - 1]["date"])
         y.push(forecasts[i]['90%'])
@@ -140,7 +148,23 @@ function default_layout(y_axis_title) {
             forecast_median_series(forecast_json)
         ], layout);
         charts.push(forecast_chart)
-    })
+    });
+
+    load_json('archive_2018_19.json', function(forecast_json) {
+        var forecast_chart = d3.select('#forecast_2018_19_chart').node()
+        var first_date = first(forecast_json)["date"]
+        var final_date = (parseInt(first_date.slice(0, 4)) + 1).toString() + "-05-31"
+        var layout = default_layout('Milk Price (NZD/kgMS)')
+        layout['xaxis'] = {
+            range: [first_date, final_date]
+        }
+        layout['yaxis']['range'] = [3, 9]
+        Plotly.plot(forecast_chart, [
+            forecast_ribbon_series(forecast_json),
+            forecast_median_series(forecast_json)
+        ], layout);
+        charts.push(forecast_chart)
+    });
     /* =========================================================================
         Plot historical Fonterra forecasts.
     ========================================================================= */
