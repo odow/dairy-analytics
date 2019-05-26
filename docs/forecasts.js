@@ -47,10 +47,11 @@ function key_from_series(data, key) {
     })
 }
 
-function default_line_series(x, y, name) {
+function default_line_series(x, y, name, key) {
     return {
         x: x,
         y: y,
+        legendgroup: key,
         name: name,
         type: 'scatter',
         line: {
@@ -65,7 +66,7 @@ function forecast_median_series(forecasts) {
     current_date = new Date().toJSON().slice(0, 10)
     x.push(current_date)
     y.push(last(forecasts)['50%'])
-    series = default_line_series(x, y, 'Best Guess')
+    series = default_line_series(x, y, 'Best Guess', '')
     series['line']['color'] = '#01579b'
     return series
 }
@@ -100,6 +101,66 @@ function forecast_ribbon_series(forecasts) {
         x: x,
         y: y,
         name: '4-in-5 Range',
+        type: 'scatter',
+        fill: 'tozerox',
+        fillcolor: '#01579b50',
+        line: {
+            color: "transparent",
+            shape: 'vh'
+        }
+    }
+}
+
+function get_low_high(data) {
+    low = data["forecast"]
+    high = data["forecast"]
+    if ('low' in data) {
+        low = data["low"]
+    }
+    if ('high' in data) {
+        high = data["high"]
+    }
+    return {'low': low, 'high': high}
+}
+
+function fonterra_ribbon_series(forecasts, is_current_season, key) {
+    last_forecast = Object.create(last(forecasts))
+    if (is_current_season) {
+        last_forecast["date"] = new Date().toJSON().slice(0, 10)
+        forecasts.push(last_forecast)
+    } else if (forecasts.length < 2) {
+        console.log("Too few forecasts")
+        return {}
+    }
+
+    var x = []
+    var y = []
+    // For a ribbon plot, we need to go along the bottom, ...
+    for (i = 0; i < forecasts.length - 1; i++) {
+        x.push(forecasts[i]["date"])
+        x.push(forecasts[i + 1]["date"])
+        fi = get_low_high(forecasts[i])
+        y.push(fi['low'])
+        y.push(fi['low'])
+    }
+    // ... head back along the top, ...
+    for (i = forecasts.length-1; i > 0; i--) {
+        x.push(forecasts[i]["date"])
+        x.push(forecasts[i - 1]["date"])
+        fi = get_low_high(forecasts[i])
+        y.push(fi['high'])
+        fi = get_low_high(forecasts[i-1])
+        y.push(fi['high'])
+    }
+    // ... and finally back down to the start.
+    x.push(forecasts[0]["date"])
+    fi = get_low_high(forecasts[0])
+    y.push(fi['low'])
+    return {
+        x: x,
+        y: y,
+        showlegend: false,
+        legendgroup: key,
         type: 'scatter',
         fill: 'tozerox',
         fillcolor: '#01579b50',
@@ -170,14 +231,25 @@ function default_layout(y_axis_title) {
     ========================================================================= */
     load_json('fonterra_forecasts.json', function(fonterra_json) {
         var fonterra_chart = d3.select('#fonterra_chart').node()
+        median_forecasts = Object.keys(fonterra_json).map(function(key, index) {
+            return default_line_series(
+                key_from_series(fonterra_json[key], 'date'),
+                key_from_series(fonterra_json[key], 'forecast'),
+                key, key
+            )
+        });
+        console.log(median_forecasts[9])
+        median_forecasts.push(
+            fonterra_ribbon_series(
+                fonterra_json["2018-19"], false, "2018-19"
+            ),
+            fonterra_ribbon_series(
+                 fonterra_json["2019-20"], true, "2019-20"
+            )
+
+        );
         Plotly.plot(fonterra_chart,
-            Object.keys(fonterra_json).map(function(key, index) {
-                return default_line_series(
-                    key_from_series(fonterra_json[key], 'date'),
-                    key_from_series(fonterra_json[key], 'forecast'),
-                    key
-                )
-            }),
+            median_forecasts,
             default_layout('Milk Price (NZD/kgMS)'));
         charts.push(fonterra_chart)
     })

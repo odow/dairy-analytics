@@ -292,25 +292,35 @@
     },
     {
       "date": "2018-10-10",
-      "forecast": 6.375
+      "forecast": 6.375,
+      "low": 6.25,
+      "high": 6.50
     },
     {
       "date": "2018-12-06",
-      "forecast": 6.15
+      "forecast": 6.15,
+      "low": 6.00,
+      "high": 6.30
     },
     {
       "date": "2019-02-28",
-      "forecast": 6.45
+      "forecast": 6.45,
+      "low": 6.30,
+      "high": 6.60
     },
     {
       "date": "2019-05-23",
-      "forecast": 6.35
+      "forecast": 6.35,
+      "low": 6.30,
+      "high": 6.40
     }
   ],
   "2019-20": [
     {
       "date": "2019-05-23",
-      "forecast": 6.75
+      "forecast": 6.75,
+      "low": 6.25,
+      "high": 7.25
     }
   ]
 }
