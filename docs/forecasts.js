@@ -72,6 +72,10 @@ function forecast_median_series(forecasts) {
 }
 
 function forecast_ribbon_series(forecasts) {
+    last_forecast = Object.create(last(forecasts))
+    last_forecast["date"] = new Date().toJSON().slice(0, 10)
+    forecasts.push(last_forecast)
+
     var x = []
     var y = []
     // For a ribbon plot, we need to go along the bottom, ...
@@ -81,12 +85,6 @@ function forecast_ribbon_series(forecasts) {
         y.push(forecasts[i]['10%'])
         y.push(forecasts[i]['10%'])
     }
-    // ... then loop up along the right-hand edge, ...
-    current_date = new Date().toJSON().slice(0, 10)
-    x.push(current_date)
-    x.push(current_date)
-    y.push(last(forecasts)['10%'])
-    y.push(last(forecasts)['90%'])
     // ... head back along the top, ...
     for (i = forecasts.length-1; i > 0; i--) {
         x.push(forecasts[i]["date"])
