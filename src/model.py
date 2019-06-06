@@ -295,7 +295,13 @@ def simulate_model(run_date):
             'date': run_date,
             'model_version': MODEL_VERSION,
             '10%': round(numpy.percentile(nzd_earnings, 10), 2),
+            '20%': round(numpy.percentile(nzd_earnings, 20), 2),
+            '30%': round(numpy.percentile(nzd_earnings, 30), 2),
+            '40%': round(numpy.percentile(nzd_earnings, 40), 2),
             '50%': round(numpy.percentile(nzd_earnings, 50), 2),
+            '60%': round(numpy.percentile(nzd_earnings, 60), 2),
+            '70%': round(numpy.percentile(nzd_earnings, 70), 2),
+            '80%': round(numpy.percentile(nzd_earnings, 80), 2),
             '90%': round(numpy.percentile(nzd_earnings, 90), 2)
         })
     with open('docs/forecasts.json', 'w') as io:
