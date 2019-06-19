@@ -121,7 +121,7 @@ function get_low_high(data) {
     return {'low': low, 'high': high}
 }
 
-function fonterra_ribbon_series(forecasts, is_current_season, key) {
+function fonterra_ribbon_series(forecasts, is_current_season, key, color) {
     last_forecast = Object.create(last(forecasts))
     if (is_current_season) {
         last_forecast["date"] = new Date().toJSON().slice(0, 10)
@@ -161,7 +161,7 @@ function fonterra_ribbon_series(forecasts, is_current_season, key) {
         legendgroup: key,
         type: 'scatter',
         fill: 'tozerox',
-        fillcolor: '#01579b50',
+        fillcolor: color,
         line: {
             color: "transparent",
             shape: 'vh'
@@ -228,6 +228,13 @@ function default_layout(y_axis_title) {
         Plot historical Fonterra forecasts.
     ========================================================================= */
     load_json('fonterra_forecasts.json', function(fonterra_json) {
+        var most_recent_forecast = last(fonterra_json['2019-20']);
+        fonterra_json['2019-20'].push({
+            'date': new Date().toJSON().slice(0, 10),
+            'forecast': most_recent_forecast['forecast'],
+            'low': most_recent_forecast['low'],
+            'high': most_recent_forecast['high']
+        });
         var fonterra_chart = d3.select('#fonterra_chart').node()
         median_forecasts = Object.keys(fonterra_json).map(function(key, index) {
             return default_line_series(
@@ -236,15 +243,27 @@ function default_layout(y_axis_title) {
                 key, key
             )
         });
-        console.log(median_forecasts[9])
+        // Programatically query the default Plotly colors so we can fill in the
+        // ribbons with the appropriate color. If Plotly changes the default
+        // color scale, this will need changing.
+        var color_scale = d3.scale.category10()
+        var colors = [];
+        for (var i = 0; i < 11; i += 1) {
+            colors.push(color_scale(i));
+        }
+        // This variable sets the opacity of the ribbons. Decrease it to make
+        // the ribbons more transparent.
+        var opacity = 'aa'
+        // The default Plotly color scheme has 10 distinct colors. The 2019-20
+        // season is the 11'th for which we have data, so it is colored the same
+        // as the first (the 0'th in the array `colors`).
         median_forecasts.push(
             fonterra_ribbon_series(
-                fonterra_json["2018-19"], false, "2018-19"
+                fonterra_json["2018-19"], false, "2018-19", colors[9] + opacity
             ),
             fonterra_ribbon_series(
-                 fonterra_json["2019-20"], true, "2019-20"
+                 fonterra_json["2019-20"], true, "2019-20", colors[0] + opacity
             )
-
         );
         Plotly.plot(fonterra_chart,
             median_forecasts,
