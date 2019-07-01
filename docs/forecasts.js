@@ -60,20 +60,26 @@ function default_line_series(x, y, name, key) {
     }
 }
 
-function forecast_median_series(forecasts) {
+function forecast_median_series(forecasts, use_current_date) {
     var x = key_from_series(forecasts, 'date')
     var y = key_from_series(forecasts, '50%')
-    current_date = new Date().toJSON().slice(0, 10)
-    x.push(current_date)
+    if (use_current_date) {
+        current_date = new Date().toJSON().slice(0, 10)
+        x.push(current_date)
+    } else {
+        x.push(last(forecasts)['date'])
+    }
     y.push(last(forecasts)['50%'])
     series = default_line_series(x, y, 'Best Guess', '')
     series['line']['color'] = '#01579b'
     return series
 }
 
-function forecast_ribbon_series(forecasts) {
+function forecast_ribbon_series(forecasts, use_current_date) {
     last_forecast = Object.create(last(forecasts))
-    last_forecast["date"] = new Date().toJSON().slice(0, 10)
+    if (use_current_date) {
+        last_forecast["date"] = new Date().toJSON().slice(0, 10)
+    }
     forecasts.push(last_forecast)
 
     var x = []
@@ -183,7 +189,8 @@ function default_layout(y_axis_title) {
             r: 0,
             t: 20
         },
-        showLegend: false
+        showLegend: false,
+        legend: {"orientation": "h"}
     }
 }
 
@@ -203,8 +210,8 @@ function default_layout(y_axis_title) {
         }
         layout['yaxis']['range'] = [3, 9]
         Plotly.plot(forecast_chart, [
-            forecast_ribbon_series(forecast_json),
-            forecast_median_series(forecast_json)
+            forecast_ribbon_series(forecast_json, true),
+            forecast_median_series(forecast_json, true)
         ], layout);
         charts.push(forecast_chart)
     });
@@ -219,8 +226,23 @@ function default_layout(y_axis_title) {
         }
         layout['yaxis']['range'] = [3, 9]
         Plotly.plot(forecast_chart, [
-            forecast_ribbon_series(forecast_json),
-            forecast_median_series(forecast_json)
+            forecast_ribbon_series(forecast_json, false),
+            forecast_median_series(forecast_json, false)
+        ], layout);
+        charts.push(forecast_chart)
+    });
+    load_json('archive_2016_17.json', function(forecast_json) {
+        var forecast_chart = d3.select('#forecast_2016_17_chart').node()
+        var first_date = first(forecast_json)["date"]
+        var final_date = (parseInt(first_date.slice(0, 4)) + 1).toString() + "-05-31"
+        var layout = default_layout('Milk Price (NZD/kgMS)')
+        layout['xaxis'] = {
+            range: [first_date, final_date]
+        }
+        layout['yaxis']['range'] = [3, 9]
+        Plotly.plot(forecast_chart, [
+            forecast_ribbon_series(forecast_json, false),
+            forecast_median_series(forecast_json, false)
         ], layout);
         charts.push(forecast_chart)
     });

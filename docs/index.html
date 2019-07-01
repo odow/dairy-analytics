@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en-us">
-
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
@@ -26,12 +25,10 @@
             a.src = g;
             m.parentNode.insertBefore(a, m)
         })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
-
         ga('create', 'UA-82305228-1', 'auto');
         ga('send', 'pageview');
     </script>
 </head>
-
 <body>
     <div class="section no-pad-bot" id="index-banner">
         <div class="col s12 m12 l8 flow-text container">
@@ -40,10 +37,15 @@
                     <h1><b>Dairy </b><img height=50px id="logo" src="logo.png"/><b> Analytics</b></h1>
                 </div>
                 <h4><b>Forecasting the <span class="light-blue-text text-darken-4">2019/20</span> Fonterra Milk Price</b></h4>
-                <p class="subtitle mono">Last Updated: <span id="last_updated"></span></p>
+                <p class="subtitle mono">
+                    Last Updated: <span id="last_updated"></span>
+                </p>
                 <div class="divider"></div>
                 <h5>Subscribe to the Dairy Analytics mailing list</h5>
-                <p class="subtitle">An infrequent mailing list with commentary on notable changes in our forecast.</p>
+                <p class="subtitle">
+                    An infrequent mailing list with commentary on notable
+                    changes in our forecast.
+                </p>
                 <!-- Begin Mailchimp Signup Form -->
                 <div id="mc_embed_signup">
                 <form action="https://dairyanalytics.us14.list-manage.com/subscribe/post?u=a01c95f29281c5b4dbf43e078&amp;id=612838ba46" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
@@ -61,7 +63,8 @@
                 <h5>Our current forecast</h5>
                 <div class="center">
                     <p class="small-text">
-                        We think there is a 4-in-5 chance that the milk price will end up between
+                        We think there is a 4-in-5 chance that the milk price
+                        will end up between
                     </p>
                     <h2 class="light-blue-text text-darken-4">
                         <b>
@@ -81,62 +84,74 @@
                         </b>
                     </h2>
                 </div>
-                <p class="subtitle"><b>Help! What do the grey slash things mean?</b></p>
-                <p class="subtitle">When we give a forecast like <b><span
-                class="light-blue-text text-darken-4">$6.00</span><span
-                class="grey-text">/90</span></b>, the <span
-                class="grey-text"><b>grey</b></span> number after the slash is
-                    the probability that the final Fonterra farmgate milk price
-                    will be greater than the <span
-                    class="light-blue-text text-darken-4"><b>blue</b></span> dollar figure.</p>
+                <p class="subtitle">
+                    <b>Help! What do the grey slash things mean?</b>
+                </p>
+                <p class="subtitle">
+                    When we give a forecast like
+                    <b><span class="light-blue-text text-darken-4">$6.00</span><span class="grey-text">/90</span></b>,
+                    the <span class="grey-text"><b>grey</b></span> number after
+                    the slash is the probability that the final Fonterra
+                    farmgate milk price will be greater than the <span class="light-blue-text text-darken-4"><b>blue</b></span>
+                    dollar figure.
+                </p>
                 <div class="divider"></div>
                 <h5>How our forecast has changed over time</h5>
-                <p class="subtitle">The dark, solid line is our <i>best
-                guess</i>. There is a 4-in-5 chance that the final milk price
-                    will end up in the shaded band.</p>
-                <div>
-                    <div id="forecast_chart"></div>
-                </div>
+                <p class="subtitle">
+                    The dark, solid line is our <i>best guess</i>. There is a
+                    4-in-5 chance that the final milk price will end up in the
+                    shaded band.
+                </p>
+                <div id="forecast_chart"></div>
                 <div class="divider"></div>
                 <h5>Historical Fonterra forecasts</h5>
-                <p class="subtitle">The historical Fonterra farmgate milk price
-                    forecasts since 2009.</p>
-                <div>
-                    <div id="fonterra_chart"></div>
-                </div>
+                <p class="subtitle">
+                    The historical Fonterra farmgate milk price forecasts
+                    since 2009.
+                </p>
+                <div id="fonterra_chart"></div>
                 <div class="divider"></div>
                 <h5>GlobalDairyTrade auction prices</h5>
-                <p class="subtitle">We use auction prices from
+                <p class="subtitle">
+                    We use auction prices from
                     <a href="https://www.globaldairytrade.info/en/product-results/">GlobalDairyTrade</a>
                     to help forecast the milk price. The prices below are not
                     identical to those published by GlobalDairyTrade; in
                     auctions where the product was not sold, or the price was
                     not published, we have
                     <a href="https://en.wikipedia.org/wiki/Imputation_(statistics)"><i>imputed</i></a>
-                    a value.</p>
-                <div>
-                    <div id="gdt_events_chart"></div>
-                </div>
+                    a value.
+                </p>
+                <div id="gdt_events_chart"></div>
                 <div class="divider"></div>
                 <h5>How did we do in the past?</h5>
-                <p class="subtitle">Here are our forecasts from the 2018/19 season.</p>
-                <div>
-                    <div id="forecast_2018_19_chart"></div>
-                </div>
+                <p class="subtitle">
+                    Here are our forecasts from the <b>2018/19</b> season.
+                </p>
+                <div id="forecast_2018_19_chart"></div>
+                <p class="subtitle">
+                    Here are our forecasts from the <b>2016/17</b> season.
+                </p>
+                <div id="forecast_2016_17_chart"></div>
                 <div class="divider"></div>
                 <h5>About</h5>
-                <p class="small-text"><b><a href="https://github.com/odow">Oscar Dowson</a></b> has
-                    a PhD in Engineering Science from the University of
+                <p class="small-text">
+                    <b><a href="https://github.com/odow">Oscar Dowson</a></b>
+                    has a PhD in Engineering Science from the University of
                     Auckland. He is now a Postdoctoral Fellow at Northwestern
-                    University.</p>
-                <p class="small-text">Got some comments? Send an email to
-                    <a href="mailto:oscar@dairyanalytics.co.nz"><u>oscar@dairyanalytics.co.nz</u></a>.</p>
+                    University.
+                </p>
+                <p class="small-text">
+                    Got some comments? Send an email to
+                    <a href="mailto:oscar@dairyanalytics.co.nz"><u>oscar@dairyanalytics.co.nz</u></a>.
+                </p>
                 <div class="divider"></div>
-                <p class="subtitle">Made by <a href="http://materializecss.com">Materialize</a></p>
+                <p class="subtitle">
+                    Made by <a href="http://materializecss.com">Materialize</a>
+                </p>
             </div>
         </div>
     </div>
     <script src="forecasts.js" type="text/javascript"></script>
 </body>
-
 </html>
