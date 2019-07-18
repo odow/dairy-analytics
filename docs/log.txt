@@ -1600,3 +1600,8 @@ Kicking off data scraper: 2019-07-14
 Kicking off data scraper: 2019-07-15
 Kicking off data scraper: 2019-07-16
 Kicking off data scraper: 2019-07-17
+Kicking off data scraper: 2019-07-18
+Kicking off automatic updater: 2019-07-18
+Updating dataset
+Nothing to be done.
+-------------------------------------------------------------------
