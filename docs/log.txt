@@ -1615,3 +1615,8 @@ Updating dataset
 Beginning simulation
 ... constructing model ...
 ... beginning Monte Carlo ...
+Kicking off data scraper: 2019-07-19
+Kicking off automatic updater: 2019-07-19
+Updating dataset
+Nothing to be done.
+-------------------------------------------------------------------
