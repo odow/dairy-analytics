@@ -1849,3 +1849,8 @@ Kicking off automatic updater: 2019-08-29
 Updating dataset
 Nothing to be done.
 -------------------------------------------------------------------
+Kicking off data scraper: 2019-08-30
+Kicking off automatic updater: 2019-08-30
+Updating dataset
+Nothing to be done.
+-------------------------------------------------------------------
