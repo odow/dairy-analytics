@@ -175,6 +175,18 @@ function fonterra_ribbon_series(forecasts, is_current_season, key, color) {
     }
 }
 
+function forecast_actual(first_date, last_date, payout) {
+    return {
+        x: [first_date, last_date],
+        y: [payout, payout],
+        show_legend: true,
+        name: 'Final payout',
+        line: {
+            color: 'red'
+        }
+    }
+}
+
 function default_layout(y_axis_title) {
     return {
         hovermode: 'closest',
@@ -227,7 +239,8 @@ function default_layout(y_axis_title) {
         layout['yaxis']['range'] = [3, 9]
         Plotly.plot(forecast_chart, [
             forecast_ribbon_series(forecast_json, false),
-            forecast_median_series(forecast_json, false)
+            forecast_median_series(forecast_json, false),
+            forecast_actual(first_date, final_date, 6.35)
         ], layout);
         charts.push(forecast_chart)
     });
@@ -242,7 +255,8 @@ function default_layout(y_axis_title) {
         layout['yaxis']['range'] = [3, 9]
         Plotly.plot(forecast_chart, [
             forecast_ribbon_series(forecast_json, false),
-            forecast_median_series(forecast_json, false)
+            forecast_median_series(forecast_json, false),
+            forecast_actual(first_date, final_date, 6.12)
         ], layout);
         charts.push(forecast_chart)
     });
