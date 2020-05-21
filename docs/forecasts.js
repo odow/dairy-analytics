@@ -164,6 +164,7 @@ function fonterra_ribbon_series(forecasts, is_current_season, key, color) {
         x: x,
         y: y,
         showlegend: false,
+        name: key,
         legendgroup: key,
         type: 'scatter',
         fill: 'tozerox',
