@@ -347,7 +347,7 @@ if __name__ == "__main__":
         print('Updating dataset')
         if get_latest_results() != None:
             update_forecast()
-        else if len(sys.argv) == 2:
+        elif len(sys.argv) == 2:
             update_forecast()
         else:
             print('Nothing to be done.')
