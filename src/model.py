@@ -25,24 +25,24 @@ def gdt_events_to_json():
         json.dump(output, io, indent=2)
 
 # To rebuild the GDT dataset, run this script:
-#
-# response = requests.get('https://s3.amazonaws.com/' + \
-#     'www-production.globaldairytrade.info/'results/' + \
-#     '55331680-e829-41fa-b581-a09e593096d1/price_indices_ten_years.json')
-# data = response.json()
-# data['PriceIndicesTenYears']['Events']['EventDetails'][0]
-# events = []
-# for event in data['PriceIndicesTenYears']['Events']['EventDetails']:
-#     events.append({
-#         'number': event['EventNumber'],
-#         'date': event['EventDate'],
-#         'guid': event['EventGUID']
-#     })
-#     try:
-#         get_results(event['guid'])
-#     except:
-#         # Some events are not available through the JSON API.
-#         print(event['number'])
+def force_rebuild_gdt():
+    response = requests.get('https://s3.amazonaws.com/' + \
+        'www-production.globaldairytrade.info/results/' + \
+        '055763cd-d9c3-4814-915c-23ed48abbaf3/price_indices_ten_years.json')
+    data = response.json()
+    data['PriceIndicesTenYears']['Events']['EventDetails'][0]
+    events = []
+    for event in data['PriceIndicesTenYears']['Events']['EventDetails']:
+        events.append({
+            'number': event['EventNumber'],
+            'date': event['EventDate'],
+            'guid': event['EventGUID']
+        })
+        try:
+            get_results(event['EventGUID'])
+        except:
+            # Some events are not available through the JSON API.
+            print(event['EventNumber'])
 
 def get_gdt_json(filename):
     url = 'https://s3.amazonaws.com/www-production.globaldairytrade.info/results/'
@@ -343,11 +343,15 @@ def update_forecast():
 if __name__ == "__main__":
     todays_date = datetime.datetime.now().strftime('%Y-%m-%d')
     print('Kicking off automatic updater: %s' % todays_date)
+    force = False
+    if len(sys.argv) > 1:
+        if "--rebuild_gdt" in sys.argv:
+            force_rebuild_gdt()
+        if "--force" in sys.argv:
+            force = True
     try:
         print('Updating dataset')
-        if get_latest_results() != None:
-            update_forecast()
-        elif len(sys.argv) == 2:
+        if (get_latest_results() != None) or force:
             update_forecast()
         else:
             print('Nothing to be done.')
