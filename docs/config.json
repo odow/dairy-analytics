@@ -1,8 +1,16 @@
 {
     "num_simulations": 20000,
-    "current_season": "2019",
-    "start_date": "2019-05-01",
+    "current_season": "2020",
+    "start_date": "2020-05-22",
     "estimates": [{
+        "fx_min": 0.6,
+        "fx_max": 0.65,
+        "cost_min": 1.6,
+        "cost_max": 2.0,
+        "default_prior": 6.5,
+        "default_prior_weight": 0.5,
+        "date": "2020-05-21"
+    }, {
         "fx_min": 0.66,
         "fx_max": 0.67,
         "cost_min": 1.6,

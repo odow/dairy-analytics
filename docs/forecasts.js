@@ -206,60 +206,51 @@ function default_layout(y_axis_title) {
     }
 }
 
+function plot_forecasts(charts, json_file, chart_name, end_date, final_price) {
+    load_json(json_file, function(forecast_json) {
+        if (json_file == 'forecasts.json') {
+            set_textual_forecast(forecast_json)
+        }
+        var forecast_chart = d3.select(chart_name).node()
+        var first_date = first(forecast_json)["date"]
+        var final_date = (parseInt(first_date.slice(0, 4)) + 1).toString() + end_date
+        var layout = default_layout('Milk Price (NZD/kgMS)')
+        layout['xaxis'] = {
+            range: [first_date, final_date]
+        }
+        layout['yaxis']['range'] = [3, 9]
+        var series = [
+            forecast_ribbon_series(forecast_json, true),
+            forecast_median_series(forecast_json, true)
+        ];
+        if (final_price != null) {
+            series.push(forecast_actual(first_date, final_date, final_price))
+        }
+        Plotly.plot(forecast_chart, series, layout);
+        charts.push(forecast_chart)
+    });
+}
+
 (function() {
     var charts = []
     /* =========================================================================
-        Plot forecasts by dairyanalytics this season.
+        Plot forecasts by dairyanalytics
     ========================================================================= */
-    load_json('forecasts.json', function(forecast_json) {
-        set_textual_forecast(forecast_json)
-        var forecast_chart = d3.select('#forecast_chart').node()
-        var first_date = first(forecast_json)["date"]
-        var final_date = (parseInt(first_date.slice(0, 4)) + 1).toString() + "-09-30"
-        var layout = default_layout('Milk Price (NZD/kgMS)')
-        layout['xaxis'] = {
-            range: [first_date, final_date]
-        }
-        layout['yaxis']['range'] = [3, 9]
-        Plotly.plot(forecast_chart, [
-            forecast_ribbon_series(forecast_json, true),
-            forecast_median_series(forecast_json, true)
-        ], layout);
-        charts.push(forecast_chart)
-    });
-
-    load_json('archive_2018_19.json', function(forecast_json) {
-        var forecast_chart = d3.select('#forecast_2018_19_chart').node()
-        var first_date = first(forecast_json)["date"]
-        var final_date = (parseInt(first_date.slice(0, 4)) + 1).toString() + "-05-31"
-        var layout = default_layout('Milk Price (NZD/kgMS)')
-        layout['xaxis'] = {
-            range: [first_date, final_date]
-        }
-        layout['yaxis']['range'] = [3, 9]
-        Plotly.plot(forecast_chart, [
-            forecast_ribbon_series(forecast_json, false),
-            forecast_median_series(forecast_json, false),
-            forecast_actual(first_date, final_date, 6.35)
-        ], layout);
-        charts.push(forecast_chart)
-    });
-    load_json('archive_2016_17.json', function(forecast_json) {
-        var forecast_chart = d3.select('#forecast_2016_17_chart').node()
-        var first_date = first(forecast_json)["date"]
-        var final_date = (parseInt(first_date.slice(0, 4)) + 1).toString() + "-05-31"
-        var layout = default_layout('Milk Price (NZD/kgMS)')
-        layout['xaxis'] = {
-            range: [first_date, final_date]
-        }
-        layout['yaxis']['range'] = [3, 9]
-        Plotly.plot(forecast_chart, [
-            forecast_ribbon_series(forecast_json, false),
-            forecast_median_series(forecast_json, false),
-            forecast_actual(first_date, final_date, 6.12)
-        ], layout);
-        charts.push(forecast_chart)
-    });
+    plot_forecasts(charts, 'forecasts.json', '#forecast_chart', '-09-30', null)
+    var archived = {
+        '2019_20': null,
+        '2018_19': 6.35,
+        '2016_17': 6.12
+    }
+    for (let [key, value] of Object.entries(archived)) {
+        plot_forecasts(
+            charts,
+            'archive_' + key + '.json',
+            '#forecast_' + key + '_chart',
+            '-05-31',
+            value
+        )
+    };
     /* =========================================================================
         Plot historical Fonterra forecasts.
     ========================================================================= */
