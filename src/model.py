@@ -5,7 +5,15 @@ RAW_FONTERRA_DATA = 'data/raw/fonterra/'
 PROCESSED_DATA = 'data/processed/'
 MODELS = 'data/models/'
 
-import datetime, io, json, numpy, os, pandas, requests, statsmodels.api
+import datetime
+import io
+import json
+import numpy
+import os
+import pandas
+import requests
+import statsmodels.api
+import sys
 import traceback
 
 def gdt_events_to_json():
@@ -338,6 +346,8 @@ if __name__ == "__main__":
     try:
         print('Updating dataset')
         if get_latest_results() != None:
+            update_forecast()
+        else if len(sys.argv) == 2:
             update_forecast()
         else:
             print('Nothing to be done.')
