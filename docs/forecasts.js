@@ -255,8 +255,8 @@ function plot_forecasts(charts, json_file, chart_name, end_date, final_price) {
         Plot historical Fonterra forecasts.
     ========================================================================= */
     load_json('fonterra_forecasts.json', function(fonterra_json) {
-        var most_recent_forecast = last(fonterra_json['2019-20']);
-        fonterra_json['2019-20'].push({
+        var most_recent_forecast = last(fonterra_json['2020-21']);
+        fonterra_json['2020-21'].push({
             'date': new Date().toJSON().slice(0, 10),
             'forecast': most_recent_forecast['forecast'],
             'low': most_recent_forecast['low'],
@@ -290,7 +290,10 @@ function plot_forecasts(charts, json_file, chart_name, end_date, final_price) {
             ),
             fonterra_ribbon_series(
                  fonterra_json["2019-20"], true, "2019-20", colors[0] + opacity
-            )
+            ),
+            fonterra_ribbon_series(
+                fonterra_json["2020-21"], true, "2020-21", colors[1] + opacity
+           )
         );
         Plotly.plot(fonterra_chart,
             median_forecasts,
