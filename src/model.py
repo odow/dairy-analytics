@@ -73,6 +73,34 @@ def get_latest_results():
     key = get_latest_key()
     return get_results(key)
 
+def update_sales_quantities():
+    event_results = []
+    for filename in os.listdir(RAW_GDT_DATA):
+        if filename[-5:] == ".json":
+            if filename == 'nzx_settlements.json':
+                continue
+            with open(RAW_GDT_DATA + filename, 'r') as io:
+                data = json.load(io)
+                date = datetime.datetime.strptime(
+                    data['event_summary']['EventSummary']['EventDate'],
+                    '%B %d, %Y %H:%M:%S')
+                event = {
+                    'trading_event': int(float(data['event_summary']['EventSummary']['EventNumber'])),
+                    'date': date.strftime('%Y-%m-%d')
+                }
+                for res in data['ProductGroups']['ProductGroupResult']:
+                    x = res['TwelveMonthQtySold']
+                    if x == "":
+                        event[res['ProductGroupCode']] = 0
+                    else:
+                        event[res['ProductGroupCode']] = int(x)
+                event['QuantitySold'] = data['event_summary']['EventSummary']['QuantitySold']
+                event['TwelveMonthQtySold'] = data['event_summary']['EventSummary']['TwelveMonthQtySold']
+                event_results.append(event)
+    event_results.sort(key= lambda x: x['trading_event'])
+    with open('docs/sales.json', 'w') as io:
+        json.dump(event_results, io)
+
 def rebuild_processed_gdt_events():
     old_df = pandas.read_csv(RAW_GDT_DATA + 'events.csv')
     old_df.sort_values('trading_event')
@@ -331,6 +359,7 @@ def update_forecast():
     impute_missing_gdt_events()
     print('... writing to file ...')
     gdt_events_to_json()
+    update_sales_quantities()
     print('... calculating sales curve ...')
     calculate_average_sales_curve()
     print('... calculating product mix ...')

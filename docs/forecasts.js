@@ -317,6 +317,36 @@ function plot_forecasts(charts, json_file, chart_name, end_date, final_price) {
         ], layout);
         charts.push(gdt_chart)
     })
+    load_json('sales.json', function(gdt_json) {
+        var gdt_chart = d3.select('#gdt_events_quantity_chart').node()
+        var layout = default_layout('Sales quantity (MT)')
+        layout['hovermode'] = 'compare'
+        Plotly.plot(gdt_chart, [
+            default_line_series(gdt_json.map(x => x['date']), gdt_json.map(x => x['QuantitySold']), 'Quantity sold'),
+            default_line_series(gdt_json.map(x => x['date']), gdt_json.map(x => x['TwelveMonthQtySold'] / 24), '12 month rolling'),
+            // default_line_series(gdt_json.map(x => x['date']), gdt_json.map(x => x['AMF'] / 24), 'AMF'),
+            // default_line_series(gdt_json.map(x => x['date']), gdt_json.map(x => x['BMP'] / 24), 'BMP'),
+            // default_line_series(gdt_json.map(x => x['date']), gdt_json.map(x => x['BUT'] / 24), 'BUT'),
+            // default_line_series(gdt_json.map(x => x['date']), gdt_json.map(x => x['SMP'] / 24), 'SMP'),
+            // default_line_series(gdt_json.map(x => x['date']), gdt_json.map(x => x['WMP'] / 24), 'WMP'),
+        ], {
+            hovermode: 'closest',
+            yaxis: {
+                title: 'Sales quantity (MT)',
+                titlefont: {
+                    family: 'Verdana, National, sans-serif',
+                },
+                range: [0, 60_000]
+            },
+            margin: {
+                r: 0,
+                t: 20
+            },
+            showLegend: false,
+            legend: {"orientation": "h"}
+        });
+        charts.push(gdt_chart)
+    });
     /* =========================================================================
         Resizing stuff.
     ========================================================================= */
