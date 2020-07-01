@@ -3,8 +3,8 @@
     "current_season": "2020",
     "start_date": "2020-05-01",
     "estimates": [{
-        "fx_min": 0.61,
-        "fx_max": 0.66,
+        "fx_min": 0.62,
+        "fx_max": 0.67,
         "cost_min": 1.6,
         "cost_max": 2.0,
         "default_prior": 6.5,
