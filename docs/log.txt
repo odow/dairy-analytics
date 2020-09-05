@@ -3910,3 +3910,8 @@ Kicking off automatic updater: 2020-09-04
 Updating dataset
 Nothing to be done.
 -------------------------------------------------------------------
+Kicking off data scraper: 2020-09-05
+Kicking off automatic updater: 2020-09-05
+Updating dataset
+Nothing to be done.
+-------------------------------------------------------------------
