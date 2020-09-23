@@ -4012,3 +4012,8 @@ Kicking off automatic updater: 2020-09-22
 Updating dataset
 Nothing to be done.
 -------------------------------------------------------------------
+Kicking off data scraper: 2020-09-23
+Kicking off automatic updater: 2020-09-23
+Updating dataset
+Nothing to be done.
+-------------------------------------------------------------------
