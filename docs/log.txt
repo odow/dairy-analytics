@@ -4566,3 +4566,8 @@ Kicking off automatic updater: 2020-12-31
 Updating dataset
 Nothing to be done.
 -------------------------------------------------------------------
+Kicking off data scraper: 2021-01-01
+Kicking off automatic updater: 2021-01-01
+Updating dataset
+Nothing to be done.
+-------------------------------------------------------------------
