@@ -5005,3 +5005,8 @@ Updating dataset
 ... calculating sales curve ...
 ... calculating product mix ...
 Beginning simulation
+Kicking off data scraper: 2021-03-17
+Kicking off automatic updater: 2021-03-17
+Updating dataset
+Nothing to be done.
+-------------------------------------------------------------------
