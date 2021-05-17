@@ -5312,3 +5312,8 @@ Kicking off automatic updater: 2021-05-16
 Updating dataset
 Nothing to be done.
 -------------------------------------------------------------------
+Kicking off data scraper: 2021-05-17
+Kicking off automatic updater: 2021-05-17
+Updating dataset
+Nothing to be done.
+-------------------------------------------------------------------
