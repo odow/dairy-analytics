@@ -1,5 +1,4 @@
 .ipynb_checkpoints
 */.ipynb_checkpoints
-data/*
 *.pyc
 .DS_store
