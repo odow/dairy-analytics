@@ -219,7 +219,7 @@ function plot_forecasts(charts, json_file, chart_name, end_date, final_price) {
         layout['xaxis'] = {
             range: [first_date, final_date]
         }
-        layout['yaxis']['range'] = [3, 9]
+        layout['yaxis']['range'] = [0, 10]
         var series = [
             forecast_ribbon_series(forecast_json, true),
             forecast_median_series(forecast_json, true)
@@ -239,6 +239,7 @@ function plot_forecasts(charts, json_file, chart_name, end_date, final_price) {
     ========================================================================= */
     plot_forecasts(charts, 'forecasts.json', '#forecast_chart', '-09-30', null)
     var archived = {
+        '2020_21': null,
         '2019_20': 7.14,
         '2018_19': 6.35,
         '2016_17': 6.12
@@ -256,8 +257,8 @@ function plot_forecasts(charts, json_file, chart_name, end_date, final_price) {
         Plot historical Fonterra forecasts.
     ========================================================================= */
     load_json('fonterra_forecasts.json', function(fonterra_json) {
-        var most_recent_forecast = last(fonterra_json['2020-21']);
-        fonterra_json['2020-21'].push({
+        var most_recent_forecast = last(fonterra_json['2021-22']);
+        fonterra_json['2021-22'].push({
             'date': new Date().toJSON().slice(0, 10),
             'forecast': most_recent_forecast['forecast'],
             'low': most_recent_forecast['low'],
@@ -294,11 +295,14 @@ function plot_forecasts(charts, json_file, chart_name, end_date, final_price) {
             ),
             fonterra_ribbon_series(
                 fonterra_json["2020-21"], true, "2020-21", colors[1] + opacity
-           )
+           ),
+           fonterra_ribbon_series(
+               fonterra_json["2021-22"], true, "2021-22", colors[2] + opacity
+          )
         );
-        Plotly.plot(fonterra_chart,
-            median_forecasts,
-            default_layout('Milk Price (NZD/kgMS)'));
+        layout = default_layout('Milk Price (NZD/kgMS)')
+        layout['yaxis']['range'] = [0, 10]
+        Plotly.plot(fonterra_chart, median_forecasts, layout);
         charts.push(fonterra_chart)
     })
     /* =========================================================================

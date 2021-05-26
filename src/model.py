@@ -47,6 +47,7 @@ def force_rebuild_gdt():
 def get_gdt_json(filename):
     url = 'https://s3.amazonaws.com/www-production.globaldairytrade.info/results/'
     return requests.get(url + filename).json()
+
 # Return the UUID for the latest trading event.
 def get_latest_key():
     response = get_gdt_json('latest.json')
@@ -81,11 +82,12 @@ def update_sales_quantities():
                 continue
             with open(RAW_GDT_DATA + filename, 'r') as io:
                 data = json.load(io)
+                event_summary = data['event_summary']['EventSummary']
                 date = datetime.datetime.strptime(
-                    data['event_summary']['EventSummary']['EventDate'],
+                    event_summary['EventDate'],
                     '%B %d, %Y %H:%M:%S')
                 event = {
-                    'trading_event': int(float(data['event_summary']['EventSummary']['EventNumber'])),
+                    'trading_event': int(float(event_summary['EventNumber'])),
                     'date': date.strftime('%Y-%m-%d')
                 }
                 for res in data['ProductGroups']['ProductGroupResult']:
@@ -94,10 +96,11 @@ def update_sales_quantities():
                         event[res['ProductGroupCode']] = 0
                     else:
                         event[res['ProductGroupCode']] = int(x)
-                event['QuantitySold'] = data['event_summary']['EventSummary']['QuantitySold']
-                event['TwelveMonthQtySold'] = data['event_summary']['EventSummary']['TwelveMonthQtySold']
+                event['QuantitySold'] = event_summary['QuantitySold']
+                event['TwelveMonthQtySold'] = \
+                    event_summary['TwelveMonthQtySold']
                 event_results.append(event)
-    event_results.sort(key= lambda x: x['trading_event'])
+    event_results.sort(key = lambda x: x['trading_event'])
     with open('docs/sales.json', 'w') as io:
         json.dump(event_results, io)
 
@@ -111,22 +114,25 @@ def rebuild_processed_gdt_events():
                 continue
             with open(RAW_GDT_DATA + filename, 'r') as io:
                 data = json.load(io)
+                event_summary = data['event_summary']['EventSummary']
                 date = datetime.datetime.strptime(
-                    data['event_summary']['EventSummary']['EventDate'],
+                    event_summary['EventDate'],
                     '%B %d, %Y %H:%M:%S')
                 event = {
-                    'trading_event': int(float(data['event_summary']['EventSummary']['EventNumber'])),
+                    'trading_event': int(float(event_summary['EventNumber'])),
                     'date': date.strftime('%Y-%m-%d')
                 }
                 for res in data['ProductGroups']['ProductGroupResult']:
                     # Annoyingly, GDT changed from the winning price to a
                     # published price at some point.
                     if 'AverageWinningPrice' in res:
-                        event[res['ProductGroupCode']] = res['AverageWinningPrice']
+                        event[res['ProductGroupCode']] = \
+                            res['AverageWinningPrice']
                     else:
-                        event[res['ProductGroupCode']] = res['AveragePublishedPrice']
+                        event[res['ProductGroupCode']] = \
+                            res['AveragePublishedPrice']
                 event_results.append(event)
-    event_results.sort(key= lambda x: x['trading_event'])
+    event_results.sort(key = lambda x: x['trading_event'])
     with open(PROCESSED_DATA + 'gdt_events.csv', 'w') as io:
         io.write('trading_event,date,amf,bmp,but,smp,wmp\n')
         first_new_event = event_results[0]['trading_event']
@@ -136,7 +142,11 @@ def rebuild_processed_gdt_events():
                 break
             else:
                 date = datetime.datetime.strptime(row[1]['date'], '%d/%m/%Y')
-                io.write(str(row[1]['trading_event']) + ',' + date.strftime('%Y-%m-%d'))
+                io.write(
+                    str(row[1]['trading_event']) + 
+                    ',' + 
+                    date.strftime('%Y-%m-%d')
+                )
                 for key in ['amf', 'bmp', 'but', 'smp', 'wmp']:
                     value = row[1][key]
                     if pandas.isnull(value):
@@ -154,14 +164,13 @@ def rebuild_processed_gdt_events():
 
 def impute_missing_gdt_events():
     gdt_events = pandas.read_csv(PROCESSED_DATA + 'gdt_events.csv')
-    # First imputation pass: if we are just missing a value for one week,
-    # average the values of the week before and the week after.
+    # First imputation pass: missing values are their most recent value.
     for key in ['amf', 'bmp', 'but', 'smp', 'wmp']:
-        for row in range(1, len(gdt_events['trading_event']) - 1):
+        for row in range(1, len(gdt_events['trading_event'])):
             if pandas.isnull(gdt_events[key][row]):
-                if not (pandas.isnull(gdt_events[key][row-1]) or pandas.isnull(gdt_events[key][row+1])):
-                    gdt_events.loc[row, key] = 0.5 * (gdt_events[key][row-1] + gdt_events[key][row+1])
-
+                if pandas.isnull(gdt_events[key][row-1]):
+                    continue
+                gdt_events.loc[row, key] = gdt_events[key][row-1]
     # Second imputation pass: impute bmp based on a linear regression of amf,
     # smp, and wmp; then impute but based on a linear regression of amf, smp,
     # and wmp.
@@ -185,12 +194,22 @@ def calculate_average_sales_curve():
     for col in range(1, sales.shape[1]):
         for row in range(sales.shape[0]):
             sales.iloc[row, col] /= sales.iloc[-1, col]
-    cumulative_sales_curve = [numpy.mean(sales.iloc[row, 1:]) for row in range(sales.shape[0])]
+    cumulative_sales_curve = [
+        numpy.mean(sales.iloc[row, 1:]) for row in range(sales.shape[0])
+    ]
     sales_curve = [cumulative_sales_curve[0]]
     for i in range(1, len(cumulative_sales_curve)):
-        sales_curve.append(cumulative_sales_curve[i] - cumulative_sales_curve[i-1])
+        sales_curve.append(
+            cumulative_sales_curve[i] - cumulative_sales_curve[i-1]
+        )
     with open(PROCESSED_DATA + 'monthly_sales_curve.json', 'w') as io:
-        json.dump([sales_curve[i] / 2 for i in range(len(sales_curve)) for j in range(2)], io)
+        json.dump(
+            [
+                sales_curve[i] / 2 for 
+                i in range(len(sales_curve)) for j in range(2)
+            ], 
+            io,
+        )
 
 def get_average_sales_curve():
     with open(PROCESSED_DATA + 'monthly_sales_curve.json', 'r') as io:
@@ -225,6 +244,7 @@ def to_log(data):
 
 def construct_gdt_model():
     data = pandas.read_csv(PROCESSED_DATA + 'gdt_events.csv')
+    data = data[100:]
     data.loc[:, 'date'] = pandas.to_datetime(data['date'], format='%Y-%m-%d')
     data.sort_values('date')
     log_data = to_log(data[['amf', 'bmp', 'but', 'smp', 'wmp']])
@@ -263,7 +283,10 @@ def simulate_gdt(model, data, sales_curve, product_mix):
     gdt_value = 0.0
     auctions = []
     for trading_event in range(2, 28):
-        auction_value = numpy.dot(product_mix[trading_event - 2], forecast_data[trading_event])
+        auction_value = numpy.dot(
+            product_mix[trading_event - 2], 
+            forecast_data[trading_event],
+        )
         auctions.append(auction_value)
         gdt_value += sales_curve[trading_event - 2] * auction_value
     return gdt_value / 1000, auctions
@@ -287,7 +310,8 @@ def simulate_model(run_date):
     model, data = construct_gdt_model()
     print('... beginning Monte Carlo ...')
     data = data.drop(['trading_event'], 1)
-    input_data = data[(start_date <= data.index) & (data.index <= run_date)].values
+    filter_ = (start_date <= data.index) & (data.index <= run_date)
+    input_data = data[filter_].values
     sales_curve = get_average_sales_curve()
     product_mix = get_product_mix()
 
@@ -298,7 +322,14 @@ def simulate_model(run_date):
     cost_simulations = []
     auctions = []
     for simulation in range(number_simulations):
-        usd_revenue, auction = simulate_gdt(model, input_data, sales_curve, product_mix)
+        if simulation % 100 == 0:
+            print(simulation)
+        usd_revenue, auction = simulate_gdt(
+            model, 
+            input_data, 
+            sales_curve, 
+            product_mix,
+        )
         auctions.append(auction)
         usd_simulations.append(usd_revenue)
         FX = numpy.random.uniform(fx_min, fx_max)
@@ -316,14 +347,6 @@ def simulate_model(run_date):
     for (i, nzd) in enumerate(nzd_earnings):
         nzd_earnings[i] += (new_mean - nzd_mean)
     print('... finished Monte Carlo ...')
-    print('... writing data ...')
-    with open(MODELS + run_date + '.json', 'w') as io:
-        json.dump({
-            'usd_simulations': usd_simulations,
-            'fx_simulations': fx_simulations,
-            'cost_simulations': cost_simulations,
-            'nzd_earnings': nzd_earnings
-        }, io)
     with open('docs/forecasts.json', 'r') as io:
         json_str = io.read()
         forecasts = json.loads(json_str[json_str.find('['):])
