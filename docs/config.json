@@ -8,7 +8,7 @@
         "cost_min": 1.8,
         "cost_max": 1.8,
         "default_prior": 7.5,
-        "default_prior_weight": 0.5,
+        "default_prior_weight": 0.0,
         "date": "2021-05-26"
     }]
 }
