@@ -1,3 +1,5 @@
+var TAB_INSTANCE = M.Tabs.init(document.getElementById("forecast_tabs"), {});
+
 var d3 = Plotly.d3;
 
 function load_json(filename, callback) {

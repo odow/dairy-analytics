@@ -34,7 +34,7 @@
         <div class="col s12 m12 l8 flow-text container">
             <div class="container">
                 <div class="light-blue-text text-darken-4">
-                    <h1><b>Dairy </b><img height=50px id="logo" src="logo.png"/><b> Analytics</b></h1>
+                    <h1><b>Dairy Analytics</b></h1>
                 </div>
                 <h4><b>Forecasting the <span class="light-blue-text text-darken-4">2021/22</span> Fonterra Milk Price</b></h4>
                 <p class="subtitle mono">
@@ -95,7 +95,6 @@
                     farmgate milk price will be greater than the <span class="light-blue-text text-darken-4"><b>blue</b></span>
                     dollar figure.
                 </p>
-                <div class="divider"></div>
                 <h5>How our forecast has changed over time</h5>
                 <p class="subtitle">
                     The dark, solid line is our <i>best guess</i>. There is a
@@ -103,14 +102,12 @@
                     shaded band.
                 </p>
                 <div id="forecast_chart"></div>
-                <div class="divider"></div>
                 <h5>Historical Fonterra forecasts</h5>
                 <p class="subtitle">
                     The historical Fonterra farmgate milk price forecasts
                     since 2009.
                 </p>
                 <div id="fonterra_chart"></div>
-                <div class="divider"></div>
                 <h5>GlobalDairyTrade auction prices</h5>
                 <p class="subtitle">
                     We use auction prices from
@@ -132,25 +129,17 @@
                     the strong seasonality in the market.
                 </p>
                 <div id="gdt_events_quantity_chart"></div>
-                <div class="divider"></div>
                 <h5>How did we do in the past?</h5>
-                <p class="subtitle">
-                    Here are our forecasts from the <b>2020/21</b> season.
-                </p>
+                <ul class="tabs" id="forecast_tabs">
+                    <li class="tab col s4"><a class="active light-blue-text text-darken-4" href="#forecast_2020_21_chart">2020/21</a></li>
+                    <li class="tab col s4"><a class="light-blue-text text-darken-4" href="#forecast_2019_20_chart">2019/20</a></li>
+                    <li class="tab col s4"><a class="light-blue-text text-darken-4" href="#forecast_2018_19_chart">2018/19</a></li>
+                    <li class="tab col s4"><a class="light-blue-text text-darken-4" href="#forecast_2016_17_chart">2016/17</a></li>
+                </ul>
                 <div id="forecast_2020_21_chart"></div>
-                <p class="subtitle">
-                    Here are our forecasts from the <b>2019/20</b> season.
-                </p>
                 <div id="forecast_2019_20_chart"></div>
-                <p class="subtitle">
-                    Here are our forecasts from the <b>2018/19</b> season.
-                </p>
                 <div id="forecast_2018_19_chart"></div>
-                <p class="subtitle">
-                    Here are our forecasts from the <b>2016/17</b> season.
-                </p>
                 <div id="forecast_2016_17_chart"></div>
-                <div class="divider"></div>
                 <h5>About</h5>
                 <p class="small-text">
                     <b><a href="https://github.com/odow">Oscar Dowson</a></b>
@@ -168,6 +157,7 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="forecasts.js" type="text/javascript"></script>
 </body>
 </html>

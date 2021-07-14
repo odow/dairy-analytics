@@ -19,3 +19,11 @@
 a {
     color: #01579b
 }
+
+.tabs .indicator {
+    background-color: #01579b
+}
+
+.tabs {
+    font-size: 1.25rem;   
+}
