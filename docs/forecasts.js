@@ -1,4 +1,5 @@
-var TAB_INSTANCE = M.Tabs.init(document.getElementById("forecast_tabs"), {});
+M.Tabs.init(document.getElementById("forecast_tabs"), {});
+M.Tabs.init(document.getElementById("globaldairytrade_tabs"), {});
 
 var d3 = Plotly.d3;
 
@@ -204,7 +205,7 @@ function default_layout(y_axis_title) {
             r: 0,
             t: 20
         },
-        showLegend: false,
+        showlegend: true,
         legend: {"orientation": "h"}
     }
 }
@@ -304,6 +305,7 @@ function plot_forecasts(charts, json_file, chart_name, end_date, final_price) {
         );
         layout = default_layout('Milk Price (NZD/kgMS)')
         layout['yaxis']['range'] = [0, 10]
+        layout['showlegend'] = false
         Plotly.plot(fonterra_chart, median_forecasts, layout);
         charts.push(fonterra_chart)
     })

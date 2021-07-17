@@ -102,34 +102,50 @@
                     shaded band.
                 </p>
                 <div id="forecast_chart"></div>
+                <h5>GlobalDairyTrade Results</h5>
+                <p class="subtitle">
+                    We use auction results from
+                    <a href="https://www.globaldairytrade.info/en/product-results/">GlobalDairyTrade</a>
+                    to help forecast the milk price.
+                </p>
+                <ul class="tabs" id="globaldairytrade_tabs">
+                    <li class="tab col s2"><a class="active light-blue-text text-darken-4" href="#globaldairytrade_prices">Prices</a></li>
+                    <li class="tab col s2"><a class="light-blue-text text-darken-4" href="#globaldairytrade_quantities">Quantities</a></li>
+                </ul>
+                <div id="globaldairytrade_prices">
+                    <p class="subtitle">
+                        The prices below are not identical to those published by
+                        GlobalDairyTrade; in auctions where the product was not
+                        sold, or the price was not published, we have
+                        <a href="https://en.wikipedia.org/wiki/Imputation_(statistics)"><i>imputed</i></a>
+                        a value.
+                    </p>
+                    <div id="gdt_events_chart"></div>
+                </div>
+                <div id="globaldairytrade_quantities">
+                    <p class="subtitle">
+                        The chart below presents a 12 month rolling average of
+                        volume of product sold across the five categories we
+                        measure, as well as an unsmoothed trace of the quantity
+                        of all products sold. We don't find that the sales
+                        quantity has a predictive impact on the final price, but
+                        it is useful to demonstrate the strong seasonality in
+                        the market.
+                    </p>
+                    <div id="gdt_events_quantity_chart"></div>    
+                </div>
                 <h5>Historical Fonterra forecasts</h5>
                 <p class="subtitle">
                     The historical Fonterra farmgate milk price forecasts
                     since 2009.
                 </p>
                 <div id="fonterra_chart"></div>
-                <h5>GlobalDairyTrade auction prices</h5>
-                <p class="subtitle">
-                    We use auction prices from
-                    <a href="https://www.globaldairytrade.info/en/product-results/">GlobalDairyTrade</a>
-                    to help forecast the milk price. The prices below are not
-                    identical to those published by GlobalDairyTrade; in
-                    auctions where the product was not sold, or the price was
-                    not published, we have
-                    <a href="https://en.wikipedia.org/wiki/Imputation_(statistics)"><i>imputed</i></a>
-                    a value.
-                </p>
-                <div id="gdt_events_chart"></div>
-                <h5>GlobalDairyTrade auction quantities</h5>
-                <p class="subtitle">
-                    The 12 month rolling average of volume of product sold across the five
-                    categories we measure, as well as an unsmoothed trace of the quantity of
-                    all products sold. We don't find that the sales quantity has a
-                    predictive impact on the final price, but it is useful to demonstrate
-                    the strong seasonality in the market.
-                </p>
-                <div id="gdt_events_quantity_chart"></div>
                 <h5>How did we do in the past?</h5>
+                <p class="subtitle">
+                    The charts were our forecasts in previous seasons. The red
+                    horizontal line (if present) is the final end-of-season
+                    Fonterra milk price.
+                </p>
                 <ul class="tabs" id="forecast_tabs">
                     <li class="tab col s4"><a class="active light-blue-text text-darken-4" href="#forecast_2020_21_chart">2020/21</a></li>
                     <li class="tab col s4"><a class="light-blue-text text-darken-4" href="#forecast_2019_20_chart">2019/20</a></li>
