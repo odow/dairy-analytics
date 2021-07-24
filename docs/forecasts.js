@@ -1,5 +1,12 @@
-M.Tabs.init(document.getElementById("forecast_tabs"), {});
-M.Tabs.init(document.getElementById("globaldairytrade_tabs"), {});
+M.Tabs.init(
+    document.getElementById("forecast_tabs"), 
+    {onShow: chart => Plotly.Plots.resize(chart)},
+);
+
+M.Tabs.init(
+    document.getElementById("globaldairytrade_tabs"), 
+    {onShow: chart => Plotly.Plots.resize(chart)},
+);
 
 var d3 = Plotly.d3;
 
