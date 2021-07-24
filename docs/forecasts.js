@@ -5,7 +5,7 @@ M.Tabs.init(
 
 M.Tabs.init(
     document.getElementById("globaldairytrade_tabs"), 
-    {onShow: chart => Plotly.Plots.resize(chart)},
+    {onShow: arg => Plotly.Plots.resize(arg.children[1])},
 );
 
 var d3 = Plotly.d3;
@@ -374,8 +374,10 @@ function plot_forecasts(charts, json_file, chart_name, end_date, final_price) {
         Resizing stuff.
     ========================================================================= */
     window.onresize = function() {
-        charts.map(function(chart) {
-            Plotly.Plots.resize(chart)
+        charts.map(function(chart){
+            if (window.getComputedStyle(chart).display == "block") {
+                Plotly.Plots.resize(chart)
+            }
         })
     };
 })();
