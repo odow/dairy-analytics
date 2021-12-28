@@ -6389,3 +6389,28 @@ Nothing to be done.
 -------------------------------------------------------------------
 Kicking off automatic updater: 2021-12-16
 Updating dataset
+Kicking off automatic updater: 2021-12-28
+Updating dataset
+... rebuilding events.csv ...
+... imputing missing data ...
+... writing to file ...
+... calculating sales curve ...
+... calculating product mix ...
+Beginning simulation
+... constructing model ...
+... beginning Monte Carlo ...
+0
+100
+200
+300
+400
+500
+600
+700
+800
+900
+8.53629668005
+8.53629668005
+... finished Monte Carlo ...
+Finished simulation.
+-------------------------------------------------------------------
