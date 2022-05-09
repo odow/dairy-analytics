@@ -4,7 +4,7 @@
     "start_date": "2021-05-01",
     "estimates": [{
         "fx_min": 0.69,
-        "fx_max": 0.67,
+        "fx_max": 0.69,
         "cost_min": 1.8,
         "cost_max": 1.8,
         "default_prior": 7.5,
