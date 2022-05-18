@@ -1,14 +1,14 @@
 {
     "num_simulations": 1000,
-    "current_season": "2021",
-    "start_date": "2021-05-01",
+    "current_season": "2022",
+    "start_date": "2022-05-01",
     "estimates": [{
-        "fx_min": 0.69,
-        "fx_max": 0.69,
-        "cost_min": 1.8,
-        "cost_max": 1.8,
+        "fx_min": 0.64,
+        "fx_max": 0.68,
+        "cost_min": 1.6,
+        "cost_max": 2.0,
         "default_prior": 7.5,
         "default_prior_weight": 0.0,
-        "date": "2021-05-26"
+        "date": "2022-05-18"
     }]
 }
