@@ -268,8 +268,8 @@ function plot_forecasts(charts, json_file, chart_name, end_date, final_price) {
         Plot historical Fonterra forecasts.
     ========================================================================= */
     load_json('fonterra_forecasts.json', function(fonterra_json) {
-        var most_recent_forecast = last(fonterra_json['2021-22']);
-        fonterra_json['2021-22'].push({
+        var most_recent_forecast = last(fonterra_json['2022-23']);
+        fonterra_json['2022-23'].push({
             'date': new Date().toJSON().slice(0, 10),
             'forecast': most_recent_forecast['forecast'],
             'low': most_recent_forecast['low'],
@@ -309,7 +309,10 @@ function plot_forecasts(charts, json_file, chart_name, end_date, final_price) {
            ),
            fonterra_ribbon_series(
                fonterra_json["2021-22"], true, "2021-22", colors[2] + opacity
-          )
+           ),
+           fonterra_ribbon_series(
+               fonterra_json["2022-23"], true, "2022-23", colors[3] + opacity
+           )
         );
         layout = default_layout('Milk Price (NZD/kgMS)')
         layout['yaxis']['range'] = [0, 12]
