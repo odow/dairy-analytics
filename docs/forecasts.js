@@ -249,7 +249,7 @@ function plot_forecasts(charts, json_file, chart_name, end_date, final_price) {
     ========================================================================= */
     plot_forecasts(charts, 'forecasts.json', '#forecast_chart', '-09-30', null)
     var archived = {
-        '2021_22': null,
+        '2021_22': 9.30,
         '2020_21': 7.54,
         '2019_20': 7.14,
         '2018_19': 6.35,
