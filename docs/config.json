@@ -3,8 +3,8 @@
     "current_season": "2022",
     "start_date": "2022-05-01",
     "estimates": [{
-        "fx_min": 0.63,
-        "fx_max": 0.66,
+        "fx_min": 0.60,
+        "fx_max": 0.63,
         "cost_min": 1.6,
         "cost_max": 2.0,
         "default_prior": 7.5,
