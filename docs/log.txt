@@ -32,3 +32,7 @@ Beginning simulation
 ... finished Monte Carlo ...
 Finished simulation.
 -------------------------------------------------------------------
+Kicking off automatic updater: 2023-03-22
+Updating dataset
+Nothing to be done.
+-------------------------------------------------------------------
