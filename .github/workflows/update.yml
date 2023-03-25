@@ -18,7 +18,7 @@ jobs:
         conda activate dairy-analytics
         python src/model.py >> 'docs/log.txt'
     - name: push
-      if github.event_name == 'workflow_dispatch'
+      if: github.event_name == 'workflow_dispatch'
       run: |
         git add .
         git commit -m "Automatic update script."
