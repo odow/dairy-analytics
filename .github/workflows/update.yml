@@ -12,6 +12,6 @@ jobs:
       with:
         activate-environment: dairy-analytics
         environment-file: environment.yml
-    - name: Test
-      run: |
+    - run: |
+        conda activate dairy-analytics
         python src/model.py
