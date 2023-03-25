@@ -410,6 +410,5 @@ if __name__ == "__main__":
     try:
         if (get_latest_results() != None) or force:
             update_forecast()
-        else:
     except:
         print(get_last_error())
