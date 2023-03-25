@@ -1,0 +1,15 @@
+[
+    {"season": 2009, "hedge": 0.6661, "spot": 0.7120},
+    {"season": 2010, "hedge": 0.7184, "spot": 0.7879},
+    {"season": 2011, "hedge": 0.7706, "spot": 0.8023},
+    {"season": 2012, "hedge": 0.7986, "spot": 0.8214},
+    {"season": 2013, "hedge": 0.8086, "spot": 0.8396},
+    {"season": 2014, "hedge": 0.7882, "spot": 0.7312},
+    {"season": 2015, "hedge": 0.7082, "spot": 0.6798},
+    {"season": 2016, "hedge": 0.6924, "spot": 0.7137},
+    {"season": 2017, "hedge": 0.7074, "spot": 0.7014},
+    {"season": 2018, "hedge": 0.6905, "spot": 0.6697},
+    {"season": 2019, "hedge": 0.6638, "spot": 0.6375},
+    {"season": 2020, "hedge": 0.6677, "spot": 0.7067},
+    {"season": 2021, "hedge": 0.6884, "spot": 0.6616}
+]
