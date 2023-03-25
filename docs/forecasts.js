@@ -248,6 +248,29 @@ function plot_forecasts(charts, json_file, chart_name, end_date, final_price) {
     });
 }
 
+function quarterly_fx_rate(hedge_json, key) {
+    var x = [];
+    var y = [];
+    offsets = {
+        'spot': [[0, '06'], [0, '09'], [0, '12'], [1, '03'], [1, '06'], [1, '09']],
+        'hedge': [[0, '06'], [0, '09'], [0, '12'], [1, '03'], [1, '06'], [1, '09']]
+    }
+    for (i = 0; i < hedge_json.length; i++) {
+        data = hedge_json[i];
+        offset = offsets[key][data['quarter'] - 1];
+        x.push((data['season'] + offset[0]) + '-' + offset[1] + '-01')
+        y.push(data[key])
+        if (data['quarter'] == 5) {
+            offset = offsets[key][5]
+            x.push((data['season'] + offset[0]) + '-' + offset[1] + '-01')
+            y.push(data[key])
+            x.push(null)
+            y.push(null)
+        }
+    }
+    return {'x': x, 'y': y, 'name': key, 'line': {'shape': 'hv'}}
+}
+
 (function() {
     var charts = []
     /* =========================================================================
@@ -379,6 +402,39 @@ function plot_forecasts(charts, json_file, chart_name, end_date, final_price) {
             legend: {"orientation": "h"}
         });
         charts.push(gdt_chart)
+    });
+    /* =========================================================================
+        Plot historical GDT events.
+    ========================================================================= */
+    load_json('fx.json', function(fx_json) {
+        load_json('fx_hedge.json', function(hedge_json) {
+            var fx_chart = d3.select('#fx_chart').node();
+            var series = [
+                default_line_series(
+                    fx_json.map(x => x['date']),
+                    fx_json.map(x => x['rate']),
+                    'NZD:USD'
+                ),
+                quarterly_fx_rate(hedge_json, 'hedge'),
+                quarterly_fx_rate(hedge_json, 'spot')
+            ];
+            Plotly.plot(fx_chart, series, {
+                hovermode: 'closest',
+                yaxis: {
+                    title: 'Exchange rate (NZD:USD)',
+                    titlefont: {
+                        family: 'Verdana, National, sans-serif',
+                    }
+                },
+                margin: {
+                    r: 0,
+                    t: 20
+                },
+                showLegend: false,
+                legend: {"orientation": "h"}
+            });
+            charts.push(fx_chart)
+        });
     });
     /* =========================================================================
         Resizing stuff.
