@@ -1,0 +1,28 @@
+name: update
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: conda-incubator/setup-miniconda@v2
+      with:
+        activate-environment: dairy-analytics
+        environment-file: environment.yml
+    - name: run_model
+      shell: bash -el {0}
+      run: |
+        conda activate dairy-analytics
+        python src/model.py >> 'docs/log.txt'
+        tail -n 20 docs/log.txt
+    - name: push
+      if: github.event_name == 'workflow_dispatch'
+      run: |
+        git add .
+        git commit -m "Automatic update script."
+        git push
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
