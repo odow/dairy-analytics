@@ -6,10 +6,10 @@
 
 MODEL_VERSION = 1
 
+RAW_DATA = 'data/raw/'
 RAW_GDT_DATA = 'data/raw/gdt/'
 RAW_FONTERRA_DATA = 'data/raw/fonterra/'
 PROCESSED_DATA = 'data/processed/'
-MODELS = 'data/models/'
 
 import datetime
 import io
@@ -376,6 +376,15 @@ def simulate_model(run_date):
         json.dump(forecasts, io, indent=2)
     return
 
+def update_fx():
+    fx = pandas.read_csv(RAW_DATA + 'fx.csv')
+    with open('docs/fx.json', 'w') as io:
+        io.write(fx.to_json(orient='records'))
+    fx_hedge = pandas.read_csv(RAW_FONTERRA_DATA + 'fx_hedge.csv')
+    with open('docs/fx_hedge.json', 'w') as io:
+        io.write(fx_hedge.to_json(orient='records'))
+    return
+
 def get_last_error():
     body = 'Error during run. Please see the error below: ' + '\n'
     with io.StringIO() as string_buffer:
@@ -412,6 +421,7 @@ if __name__ == "__main__":
             force = True
     try:
         if (get_latest_results() != None) or force:
+            update_fx()
             update_forecast()
     except:
         print(get_last_error())
