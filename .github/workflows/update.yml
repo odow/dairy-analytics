@@ -11,7 +11,7 @@ jobs:
     - uses: conda-incubator/setup-miniconda@v2
       with:
         activate-environment: dairy-analytics
-        environment-file: dairy-analytics.yml
+        environment-file: environment.yml
     - name: Test
       run: |
         python src/model.py
