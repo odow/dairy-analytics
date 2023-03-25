@@ -22,7 +22,7 @@ jobs:
         python src/model.py >> 'docs/log.txt'
         tail -n 20 docs/log.txt
     - name: push
-      if: github.event_name == 'workflow_dispatch'
+      if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
       run: |
         git config --global user.email "odow@users.noreply.github.com"
         git config --global user.name "Oscar Dowson"
