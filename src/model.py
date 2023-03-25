@@ -408,11 +408,7 @@ if __name__ == "__main__":
         if "--force" in sys.argv:
             force = True
     try:
-        print('Updating dataset')
         if (get_latest_results() != None) or force:
             update_forecast()
-        else:
-            print('Nothing to be done.')
     except:
         print(get_last_error())
-    print('-------------------------------------------------------------------')
