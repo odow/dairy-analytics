@@ -1,12 +1,5 @@
--------------------------------------------------------------------
 Kicking off automatic updater: 2023-03-19
-Updating dataset
-Nothing to be done.
--------------------------------------------------------------------
 Kicking off automatic updater: 2023-03-20
-Updating dataset
-Nothing to be done.
--------------------------------------------------------------------
 Kicking off automatic updater: 2023-03-21
 Updating dataset
 ... rebuilding events.csv ...
@@ -31,20 +24,7 @@ Beginning simulation
 8.53581805963
 ... finished Monte Carlo ...
 Finished simulation.
--------------------------------------------------------------------
 Kicking off automatic updater: 2023-03-22
-Updating dataset
-Nothing to be done.
--------------------------------------------------------------------
 Kicking off automatic updater: 2023-03-23
-Updating dataset
-Nothing to be done.
--------------------------------------------------------------------
 Kicking off automatic updater: 2023-03-24
-Updating dataset
-Nothing to be done.
--------------------------------------------------------------------
 Kicking off automatic updater: 2023-03-25
-Updating dataset
-Nothing to be done.
--------------------------------------------------------------------
