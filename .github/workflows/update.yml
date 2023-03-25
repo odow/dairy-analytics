@@ -19,7 +19,11 @@ jobs:
       shell: bash -el {0}
       run: |
         conda activate dairy-analytics
-        python src/model.py >> 'docs/log.txt'
+        if [[ ${{ github.event_name == 'schedule' }} == true ]]; then
+          python src/model.py >> 'docs/log.txt'
+        else
+          python src/model.py --force >> 'docs/log.txt'
+        fi
         tail -n 20 docs/log.txt
     - name: push
       if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
