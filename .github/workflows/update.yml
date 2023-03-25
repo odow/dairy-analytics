@@ -17,6 +17,7 @@ jobs:
       run: |
         conda activate dairy-analytics
         python src/model.py >> 'docs/log.txt'
+        tail -n 20 docs/log.txt
     - name: push
       if: github.event_name == 'workflow_dispatch'
       run: |
