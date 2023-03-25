@@ -16,4 +16,11 @@ jobs:
       shell: bash -el {0}
       run: |
         conda activate dairy-analytics
-        python src/model.py
+        python src/model.py >> 'docs/log.txt'
+        # Try push here to see if token works
+        git push
+        git add .
+        git commit -m "Automatic update script."
+        # git push Don't push new stuff yet
+      env:
+        GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
