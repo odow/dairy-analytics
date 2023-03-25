@@ -248,6 +248,21 @@ function plot_forecasts(charts, json_file, chart_name, end_date, final_price) {
     });
 }
 
+function annual_fx_rate(actual_json, key) {
+    var x = [];
+    var y = [];
+    for (i = 0; i < actual_json.length; i++) {
+        data = actual_json[i];
+        x.push(data['season'] + '-06-01')
+        y.push(data[key])
+        x.push((data['season'] + 1) + '-09-01')
+        y.push(data[key])
+        x.push(null)
+        y.push(null)
+    }
+    return {'x': x, 'y': y, 'name': key + ' (annual)'}
+
+}
 function quarterly_fx_rate(hedge_json, key) {
     var x = [];
     var y = [];
@@ -408,32 +423,36 @@ function quarterly_fx_rate(hedge_json, key) {
     ========================================================================= */
     load_json('fx.json', function(fx_json) {
         load_json('fx_hedge.json', function(hedge_json) {
-            var fx_chart = d3.select('#fx_chart').node();
-            var series = [
-                default_line_series(
-                    fx_json.map(x => x['date']),
-                    fx_json.map(x => x['rate']),
-                    'NZD:USD'
-                ),
-                quarterly_fx_rate(hedge_json, 'hedge'),
-                quarterly_fx_rate(hedge_json, 'spot')
-            ];
-            Plotly.plot(fx_chart, series, {
-                hovermode: 'closest',
-                yaxis: {
-                    title: 'Exchange rate (NZD:USD)',
-                    titlefont: {
-                        family: 'Verdana, National, sans-serif',
-                    }
-                },
-                margin: {
-                    r: 0,
-                    t: 20
-                },
-                showLegend: false,
-                legend: {"orientation": "h"}
+            load_json('fx_actual.json', function(actual_json) {
+                var fx_chart = d3.select('#fx_chart').node();
+                var series = [
+                    default_line_series(
+                        fx_json.map(x => x['date']),
+                        fx_json.map(x => x['rate']),
+                        'NZD:USD'
+                    ),
+                    quarterly_fx_rate(hedge_json, 'hedge'),
+                    quarterly_fx_rate(hedge_json, 'spot'),
+                    // annual_fx_rate(actual_json, 'hedge'),
+                    // annual_fx_rate(actual_json, 'spot')
+                ];
+                Plotly.plot(fx_chart, series, {
+                    hovermode: 'closest',
+                    yaxis: {
+                        title: 'Exchange rate (NZD:USD)',
+                        titlefont: {
+                            family: 'Verdana, National, sans-serif',
+                        }
+                    },
+                    margin: {
+                        r: 0,
+                        t: 20
+                    },
+                    showLegend: false,
+                    legend: {"orientation": "h"}
+                });
+                charts.push(fx_chart)
             });
-            charts.push(fx_chart)
         });
     });
     /* =========================================================================
