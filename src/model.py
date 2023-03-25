@@ -251,7 +251,7 @@ def to_log(data):
 def construct_gdt_model():
     data = pandas.read_csv(PROCESSED_DATA + 'gdt_events.csv')
     data = data[100:]
-    data.loc[:, 'date'] = pandas.to_datetime(data['date'], format='%Y-%m-%d')
+    data['date'] = pandas.to_datetime(data['date'], format='%Y-%m-%d')
     data.sort_values('date')
     log_data = to_log(data[['amf', 'bmp', 'but', 'smp', 'wmp']])
     model = statsmodels.tsa.api.VAR(log_data)
@@ -316,7 +316,7 @@ def simulate_model(run_date):
     print('... constructing model ...')
     model, data = construct_gdt_model()
     print('... beginning Monte Carlo ...')
-    data = data.drop(['trading_event'], 1)
+    data = data.drop(labels = ['trading_event'], axis = 1)
     filter_ = (start_date <= data.index) & (data.index <= run_date)
     input_data = data[filter_].values
     sales_curve = get_average_sales_curve()
@@ -330,7 +330,8 @@ def simulate_model(run_date):
     auctions = []
     for simulation in range(number_simulations):
         if simulation % 100 == 0:
-            print(simulation)
+            progress = 100 * simulation / number_simulations
+            print('%.2f' % progress, '%', sep = '', end = ' ')
         usd_revenue, auction = simulate_gdt(
             model, 
             input_data, 
@@ -344,6 +345,7 @@ def simulate_model(run_date):
         cost = numpy.random.uniform(cost_min, cost_max)
         cost_simulations.append(cost)
         nzd_earnings.append(usd_revenue / FX - cost)
+    print()
     # Normalize the nzd_earnings by shifing the mean to the weighted default
     # prior.
     nzd_mean = numpy.mean(nzd_earnings)
