@@ -44,4 +44,4 @@ code available under the MPL-2.0 license.
 
 ## Contact
 
-For comments, criticims, and suggestions, please open a GitHub issue.
+For comments, criticisms, and suggestions, please open a GitHub issue.
