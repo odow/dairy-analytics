@@ -298,7 +298,8 @@ def simulate_gdt(model, data, sales_curve, product_mix):
     return gdt_value / 1000, auctions
 
 def load_config():
-    with open('docs/config.json', 'r') as io:
+    filename = os.getenv('DAIRY_ANALYTICS_CONFIG', default = 'docs/config.json')
+    with open(filename, 'r') as io:
             return json.load(io)
 
 def simulate_model(run_date):

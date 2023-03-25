@@ -32,6 +32,9 @@ Two key areas of improvement to consider are:
 Currently, these two fields are set using expert judgement in the
 `docs/config.json` file.
 
+To use a different config file, set the `DAIRY_ANALYTICS_CONFIG` environment
+variable.
+
 ## License
 
 The source code in this repository is available under the
