@@ -255,13 +255,16 @@ function annual_fx_rate(actual_json, key) {
         data = actual_json[i];
         x.push(data['season'] + '-06-01')
         y.push(data[key])
-        x.push((data['season'] + 1) + '-09-01')
+        x.push((data['season'] + 1) + '-05-31')
         y.push(data[key])
         x.push(null)
         y.push(null)
     }
-    return {'x': x, 'y': y, 'name': key + ' (annual)'}
-
+    ret = {'x': x, 'y': y, 'name': key + ' (annual)'}
+    if (key != 'hedge') {
+        ret['visible'] = 'legendonly'
+    }
+    return ret
 }
 function quarterly_fx_rate(hedge_json, key) {
     var x = [];
@@ -283,7 +286,7 @@ function quarterly_fx_rate(hedge_json, key) {
             y.push(null)
         }
     }
-    return {'x': x, 'y': y, 'name': key, 'line': {'shape': 'hv'}}
+    return {'x': x, 'y': y, 'name': key, 'line': {'shape': 'hv'}, 'visible': 'legendonly'}
 }
 
 (function() {
@@ -431,10 +434,10 @@ function quarterly_fx_rate(hedge_json, key) {
                         fx_json.map(x => x['rate']),
                         'NZD:USD'
                     ),
+                    annual_fx_rate(actual_json, 'hedge'),
+                    annual_fx_rate(actual_json, 'spot'),
                     quarterly_fx_rate(hedge_json, 'hedge'),
-                    quarterly_fx_rate(hedge_json, 'spot'),
-                    // annual_fx_rate(actual_json, 'hedge'),
-                    // annual_fx_rate(actual_json, 'spot')
+                    quarterly_fx_rate(hedge_json, 'spot')
                 ];
                 Plotly.plot(fx_chart, series, {
                     hovermode: 'closest',
