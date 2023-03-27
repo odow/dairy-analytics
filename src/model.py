@@ -370,7 +370,8 @@ def simulate_model(run_date):
             '60%': round(numpy.percentile(nzd_earnings, 60), 2),
             '70%': round(numpy.percentile(nzd_earnings, 70), 2),
             '80%': round(numpy.percentile(nzd_earnings, 80), 2),
-            '90%': round(numpy.percentile(nzd_earnings, 90), 2)
+            '90%': round(numpy.percentile(nzd_earnings, 90), 2),
+            'config': config
         })
     with open('docs/forecasts.json', 'w') as io:
         json.dump(forecasts, io, indent=2)
