@@ -300,6 +300,7 @@ function quarterly_fx_rate(hedge_json, key) {
         '2020_21': 7.54,
         '2019_20': 7.14,
         '2018_19': 6.35,
+        '2017_18': 6.74,
         '2016_17': 6.12
     }
     for (let [key, value] of Object.entries(archived)) {
@@ -422,7 +423,7 @@ function quarterly_fx_rate(hedge_json, key) {
         charts.push(gdt_chart)
     });
     /* =========================================================================
-        Plot historical GDT events.
+        Plot FX rate.
     ========================================================================= */
     load_json('fx.json', function(fx_json) {
         load_json('fx_hedge.json', function(hedge_json) {
