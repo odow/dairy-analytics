@@ -231,7 +231,7 @@ function plot_forecasts(charts, json_file, chart_name, end_date, final_price) {
         var forecast_chart = d3.select(chart_name).node()
         var first_date = first(forecast_json)["date"]
         var final_date = (parseInt(first_date.slice(0, 4)) + 1).toString() + end_date
-        var layout = default_layout('Milk Price (NZD/kgMS)')
+        var layout = default_layout('Milk Price [NZD/kgMS]')
         layout['xaxis'] = {
             range: [first_date, final_date]
         }
@@ -362,7 +362,7 @@ function quarterly_fx_rate(hedge_json, key) {
                fonterra_json["2022-23"], true, "2022-23", colors[3] + opacity
            )
         );
-        layout = default_layout('Milk Price (NZD/kgMS)')
+        layout = default_layout('Milk Price [NZD/kgMS]')
         layout['yaxis']['range'] = [0, 12]
         layout['showlegend'] = false
         Plotly.plot(fonterra_chart, median_forecasts, layout);
@@ -373,7 +373,7 @@ function quarterly_fx_rate(hedge_json, key) {
     ========================================================================= */
     load_json('gdt_events.json', function(gdt_json) {
         var gdt_chart = d3.select('#gdt_events_chart').node()
-        var layout = default_layout('Price(USD / tonne')
+        var layout = default_layout('Price [USD/tonne]')
         layout['hovermode'] = 'compare'
         Plotly.plot(gdt_chart, [
             default_line_series(gdt_json['date'], gdt_json['amf'], 'AMF'),
@@ -407,7 +407,7 @@ function quarterly_fx_rate(hedge_json, key) {
         Plotly.plot(gdt_chart, series, {
             hovermode: 'closest',
             yaxis: {
-                title: 'Sales quantity (tonne)',
+                title: 'Sales quantity [tonne]',
                 titlefont: {
                     family: 'Verdana, National, sans-serif',
                 },
@@ -443,7 +443,7 @@ function quarterly_fx_rate(hedge_json, key) {
                 Plotly.plot(fx_chart, series, {
                     hovermode: 'closest',
                     yaxis: {
-                        title: 'Exchange rate (NZD:USD)',
+                        title: 'Exchange rate [NZD:USD]',
                         titlefont: {
                             family: 'Verdana, National, sans-serif',
                         }
