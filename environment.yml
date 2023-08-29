@@ -3,4 +3,5 @@ dependencies:
   - python=3.10
   - numpy=1
   - pandas=1
+  - requests
   - statsmodels=0.13
