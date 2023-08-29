@@ -172,5 +172,34 @@
         }
       ]
     }
+  },
+  {
+    "date": "2023-08-29",
+    "model_version": 1,
+    "10%": 5.45,
+    "20%": 5.73,
+    "30%": 5.94,
+    "40%": 6.12,
+    "50%": 6.29,
+    "60%": 6.46,
+    "70%": 6.65,
+    "80%": 6.89,
+    "90%": 7.28,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2023",
+      "start_date": "2023-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.6,
+          "fx_max": 0.65,
+          "cost_min": 2.0,
+          "cost_max": 2.5,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2023-06-19"
+        }
+      ]
+    }
   }
 ]
