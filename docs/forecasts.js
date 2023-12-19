@@ -351,17 +351,20 @@ function quarterly_fx_rate(hedge_json, key) {
                 fonterra_json["2018-19"], false, "2018-19", colors[9] + opacity
             ),
             fonterra_ribbon_series(
-                 fonterra_json["2019-20"], true, "2019-20", colors[0] + opacity
+                 fonterra_json["2019-20"], false, "2019-20", colors[0] + opacity
             ),
             fonterra_ribbon_series(
-                fonterra_json["2020-21"], true, "2020-21", colors[1] + opacity
+                fonterra_json["2020-21"], false, "2020-21", colors[1] + opacity
            ),
            fonterra_ribbon_series(
-               fonterra_json["2021-22"], true, "2021-22", colors[2] + opacity
+               fonterra_json["2021-22"], false, "2021-22", colors[2] + opacity
            ),
            fonterra_ribbon_series(
-               fonterra_json["2022-23"], true, "2022-23", colors[3] + opacity
-           )
+               fonterra_json["2022-23"], false, "2022-23", colors[3] + opacity
+           ),
+           fonterra_ribbon_series(
+            fonterra_json["2023-24"], true, "2023-24", colors[4] + opacity
+        )
         );
         layout = default_layout('Milk Price [NZD/kgMS]')
         layout['yaxis']['range'] = [0, 12]
