@@ -318,8 +318,8 @@ function quarterly_fx_rate(hedge_json, key) {
         Plot historical Fonterra forecasts.
     ========================================================================= */
     load_json('fonterra_forecasts.json', function(fonterra_json) {
-        var most_recent_forecast = last(fonterra_json['2022-23']);
-        fonterra_json['2022-23'].push({
+        var most_recent_forecast = last(fonterra_json['2023-24']);
+        fonterra_json['2023-24'].push({
             'date': new Date().toJSON().slice(0, 10),
             'forecast': most_recent_forecast['forecast'],
             'low': most_recent_forecast['low'],
