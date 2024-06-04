@@ -318,8 +318,9 @@ function quarterly_fx_rate(hedge_json, key) {
         Plot historical Fonterra forecasts.
     ========================================================================= */
     load_json('fonterra_forecasts.json', function(fonterra_json) {
-        var most_recent_forecast = last(fonterra_json['2023-24']);
-        fonterra_json['2023-24'].push({
+        var current_season = '2024-25';
+        var most_recent_forecast = last(fonterra_json[current_season]);
+        fonterra_json[current_season].push({
             'date': new Date().toJSON().slice(0, 10),
             'forecast': most_recent_forecast['forecast'],
             'low': most_recent_forecast['low'],
@@ -352,20 +353,23 @@ function quarterly_fx_rate(hedge_json, key) {
                 fonterra_json["2018-19"], false, "2018-19", colors[9] + opacity
             ),
             fonterra_ribbon_series(
-                 fonterra_json["2019-20"], false, "2019-20", colors[0] + opacity
+                fonterra_json["2019-20"], false, "2019-20", colors[0] + opacity
             ),
             fonterra_ribbon_series(
                 fonterra_json["2020-21"], false, "2020-21", colors[1] + opacity
-           ),
-           fonterra_ribbon_series(
-               fonterra_json["2021-22"], false, "2021-22", colors[2] + opacity
-           ),
-           fonterra_ribbon_series(
-               fonterra_json["2022-23"], false, "2022-23", colors[3] + opacity
-           ),
-           fonterra_ribbon_series(
-            fonterra_json["2023-24"], true, "2023-24", colors[4] + opacity
-        )
+            ),
+            fonterra_ribbon_series(
+                fonterra_json["2021-22"], false, "2021-22", colors[2] + opacity
+            ),
+            fonterra_ribbon_series(
+                fonterra_json["2022-23"], false, "2022-23", colors[3] + opacity
+            ),
+            fonterra_ribbon_series(
+                fonterra_json["2023-24"], true, "2023-24", colors[4] + opacity
+            ),
+            fonterra_ribbon_series(
+                fonterra_json["2024-25"], true, "2024-25", colors[5] + opacity
+            )
         );
         layout = default_layout('Milk Price [NZD/kgMS]')
         layout['yaxis']['range'] = [0, 12]

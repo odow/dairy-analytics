@@ -11,5 +11,6 @@
     {"season": 2018, "hedge": 0.6905, "spot": 0.6697},
     {"season": 2019, "hedge": 0.6638, "spot": 0.6375},
     {"season": 2020, "hedge": 0.6677, "spot": 0.7067},
-    {"season": 2021, "hedge": 0.6884, "spot": 0.6616}
+    {"season": 2021, "hedge": 0.6884, "spot": 0.6616},
+    {"season": 2022, "hedge": 0.6357, "spot": 0.6211}
 ]
