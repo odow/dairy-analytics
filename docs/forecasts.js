@@ -232,6 +232,7 @@ function plot_forecasts(charts, json_file, chart_name, end_date, final_price) {
         var first_date = first(forecast_json)["date"]
         var final_date = (parseInt(first_date.slice(0, 4)) + 1).toString() + end_date
         var layout = default_layout('Milk Price [NZD/kgMS]')
+        layout['showlegend'] = false
         layout['xaxis'] = {
             range: [first_date, final_date]
         }
@@ -294,7 +295,7 @@ function quarterly_fx_rate(hedge_json, key) {
     /* =========================================================================
         Plot forecasts by dairyanalytics
     ========================================================================= */
-    plot_forecasts(charts, 'forecasts.json', '#forecast_chart', '-09-30', null)
+    plot_forecasts(charts, 'forecasts.json', '#forecast_chart', '-05-31', null)
     var archived = {
         '2023_24': null,
         '2022_23': 8.22,

@@ -172,14 +172,13 @@ def impute_missing_gdt_events():
     gdt_events = pandas.read_csv(PROCESSED_DATA + 'gdt_events.csv')
     # First imputation pass: missing values are their most recent value.
     for key in ['amf', 'bmp', 'but', 'smp', 'wmp']:
-        for row in range(1, len(gdt_events['trading_event'])):
+        for row in range(len(gdt_events['trading_event'])-1, 0, -1):
             if pandas.isnull(gdt_events[key][row]):
                 if pandas.isnull(gdt_events[key][row-1]):
                     continue
                 gdt_events.loc[row, key] = gdt_events[key][row-1]
-    # Second imputation pass: impute bmp based on a linear regression of amf,
-    # smp, and wmp; then impute but based on a linear regression of amf, smp,
-    # and wmp.
+    # Second imputation pass: impute bmp and but based on a linear regression of
+    # amf, smp, and wmp.
     training_df = gdt_events.dropna()
     features = pandas.DataFrame(training_df, columns=['amf', 'smp', 'wmp'])
     for imputation_key in ['bmp', 'but']:
