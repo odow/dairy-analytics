@@ -297,7 +297,7 @@ function quarterly_fx_rate(hedge_json, key) {
     ========================================================================= */
     plot_forecasts(charts, 'forecasts.json', '#forecast_chart', '-05-31', null)
     var archived = {
-        '2023_24': null,
+        '2023_24': 7.83,
         '2022_23': 8.22,
         '2021_22': 9.30,
         '2020_21': 7.54,
