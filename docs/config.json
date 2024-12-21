@@ -3,8 +3,8 @@
     "current_season": "2024",
     "start_date": "2024-05-01",
     "estimates": [{
-        "fx_min": 0.59,
-        "fx_max": 0.63,
+        "fx_min": 0.57,
+        "fx_max": 0.61,
         "cost_min": 2.0,
         "cost_max": 2.5,
         "default_prior": 7.5,
