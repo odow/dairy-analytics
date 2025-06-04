@@ -297,6 +297,7 @@ function quarterly_fx_rate(hedge_json, key) {
     ========================================================================= */
     plot_forecasts(charts, 'forecasts.json', '#forecast_chart', '-05-31', null)
     var archived = {
+        '2024_25': null,
         '2023_24': 7.83,
         '2022_23': 8.22,
         '2021_22': 9.30,
@@ -319,7 +320,7 @@ function quarterly_fx_rate(hedge_json, key) {
         Plot historical Fonterra forecasts.
     ========================================================================= */
     load_json('fonterra_forecasts.json', function(fonterra_json) {
-        var current_season = '2024-25';
+        var current_season = '2025-26';
         var most_recent_forecast = last(fonterra_json[current_season]);
         fonterra_json[current_season].push({
             'date': new Date().toJSON().slice(0, 10),
@@ -370,6 +371,9 @@ function quarterly_fx_rate(hedge_json, key) {
             ),
             fonterra_ribbon_series(
                 fonterra_json["2024-25"], true, "2024-25", colors[5] + opacity
+            ),
+            fonterra_ribbon_series(
+                fonterra_json["2025-26"], true, "2025-26", colors[5] + opacity
             )
         );
         layout = default_layout('Milk Price [NZD/kgMS]')
