@@ -5,12 +5,12 @@
 //  file, You can obtain one at https://mozilla.org/MPL/2.0/.
 
 M.Tabs.init(
-    document.getElementById("forecast_tabs"), 
+    document.getElementById("forecast_tabs"),
     {onShow: chart => Plotly.Plots.resize(chart)},
 );
 
 M.Tabs.init(
-    document.getElementById("globaldairytrade_tabs"), 
+    document.getElementById("globaldairytrade_tabs"),
     {onShow: arg => Plotly.Plots.resize(arg.children[1])},
 );
 
@@ -297,7 +297,7 @@ function quarterly_fx_rate(hedge_json, key) {
     ========================================================================= */
     plot_forecasts(charts, 'forecasts.json', '#forecast_chart', '-05-31', null)
     var archived = {
-        '2024_25': null,
+        '2024_25': 10.16,
         '2023_24': 7.83,
         '2022_23': 8.22,
         '2021_22': 9.30,
