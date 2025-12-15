@@ -149,8 +149,8 @@ def rebuild_processed_gdt_events():
             else:
                 date = datetime.datetime.strptime(row[1]['date'], '%d/%m/%Y')
                 io.write(
-                    str(row[1]['trading_event']) + 
-                    ',' + 
+                    str(row[1]['trading_event']) +
+                    ',' +
                     date.strftime('%Y-%m-%d')
                 )
                 for key in ['amf', 'bmp', 'but', 'smp', 'wmp']:
@@ -210,9 +210,9 @@ def calculate_average_sales_curve():
     with open(PROCESSED_DATA + 'monthly_sales_curve.json', 'w') as io:
         json.dump(
             [
-                sales_curve[i] / 2 for 
+                sales_curve[i] / 2 for
                 i in range(len(sales_curve)) for j in range(2)
-            ], 
+            ],
             io,
         )
 
@@ -289,7 +289,7 @@ def simulate_gdt(model, data, sales_curve, product_mix):
     auctions = []
     for trading_event in range(2, 28):
         auction_value = numpy.dot(
-            product_mix[trading_event - 2], 
+            product_mix[trading_event - 2],
             forecast_data[trading_event],
         )
         auctions.append(auction_value)
@@ -332,9 +332,9 @@ def simulate_model(run_date):
             progress = 100 * simulation / number_simulations
             print('%.2f' % progress, '%', sep = '', end = ' ')
         usd_revenue, auction = simulate_gdt(
-            model, 
-            input_data, 
-            sales_curve, 
+            model,
+            input_data,
+            sales_curve,
             product_mix,
         )
         auctions.append(auction)
@@ -422,6 +422,6 @@ if __name__ == "__main__":
     try:
         if (get_latest_results() != None) or force:
             update_fx()
-            update_forecast()
+            # update_forecast()
     except:
         print(get_last_error())
