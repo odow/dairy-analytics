@@ -3,10 +3,10 @@
     "current_season": "2025",
     "start_date": "2025-05-01",
     "estimates": [{
-        "fx_min": 0.57,
+        "fx_min": 0.58,
         "fx_max": 0.61,
-        "cost_min": 2.0,
-        "cost_max": 2.5,
+        "cost_min": 2.1,
+        "cost_max": 2.6,
         "default_prior": 7.5,
         "default_prior_weight": 0.0,
         "date": "2025-05-29"

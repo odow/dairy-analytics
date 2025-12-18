@@ -422,6 +422,6 @@ if __name__ == "__main__":
     try:
         if (get_latest_results() != None) or force:
             update_fx()
-            # update_forecast()
+            update_forecast()
     except:
         print(get_last_error())
