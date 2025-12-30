@@ -228,7 +228,7 @@ function plot_forecasts(charts, json_file, chart_name, end_date, final_price) {
         if (json_file == 'forecasts.json') {
             set_textual_forecast(forecast_json)
         }
-        var forecast_chart = d3.select(chart_name).node()
+        var forecast_chart = document.getElementById(chart_name)
         var first_date = first(forecast_json)["date"]
         var final_date = (parseInt(first_date.slice(0, 4)) + 1).toString() + end_date
         var layout = default_layout('Milk Price [NZD/kgMS]')
@@ -244,7 +244,7 @@ function plot_forecasts(charts, json_file, chart_name, end_date, final_price) {
         if (final_price != null) {
             series.push(forecast_actual(first_date, final_date, final_price))
         }
-        Plotly.plot(forecast_chart, series, layout);
+        Plotly.newPlot(forecast_chart, series, layout);
         charts.push(forecast_chart)
     });
 }
@@ -295,7 +295,7 @@ function quarterly_fx_rate(hedge_json, key) {
     /* =========================================================================
         Plot forecasts by dairyanalytics
     ========================================================================= */
-    plot_forecasts(charts, 'forecasts.json', '#forecast_chart', '-05-31', null)
+    plot_forecasts(charts, 'forecasts.json', 'forecast_chart', '-05-31', null)
     var archived = {
         '2024_25': 10.16,
         '2023_24': 7.83,
@@ -311,7 +311,7 @@ function quarterly_fx_rate(hedge_json, key) {
         plot_forecasts(
             charts,
             'archive_' + key + '.json',
-            '#forecast_' + key + '_chart',
+            'forecast_' + key + '_chart',
             '-05-31',
             value
         )
@@ -328,7 +328,7 @@ function quarterly_fx_rate(hedge_json, key) {
             'low': most_recent_forecast['low'],
             'high': most_recent_forecast['high']
         });
-        var fonterra_chart = d3.select('#fonterra_chart').node()
+        var fonterra_chart = document.getElementById('fonterra_chart')
         median_forecasts = Object.keys(fonterra_json).map(function(key, index) {
             return default_line_series(
                 key_from_series(fonterra_json[key], 'date'),
@@ -336,14 +336,19 @@ function quarterly_fx_rate(hedge_json, key) {
                 key, key
             )
         });
-        // Programatically query the default Plotly colors so we can fill in the
-        // ribbons with the appropriate color. If Plotly changes the default
-        // color scale, this will need changing.
-        var color_scale = d3.scale.category10()
-        var colors = [];
-        for (var i = 0; i < 11; i += 1) {
-            colors.push(color_scale(i));
-        }
+        // If Plotly changes the default color scale, this will need changing.
+        var colors = [
+            "#636efa",
+            "#ef553b",
+            "#00cc96",
+            "#ab63fa",
+            "#ffa15a",
+            "#19d3f3",
+            "#ff6692",
+            "#b6e880",
+            "#ff97ff",
+            "#fecb52"
+        ];
         // This variable sets the opacity of the ribbons. Decrease it to make
         // the ribbons more transparent.
         var opacity = 'aa'
@@ -373,23 +378,23 @@ function quarterly_fx_rate(hedge_json, key) {
                 fonterra_json["2024-25"], true, "2024-25", colors[5] + opacity
             ),
             fonterra_ribbon_series(
-                fonterra_json["2025-26"], true, "2025-26", colors[5] + opacity
+                fonterra_json["2025-26"], true, "2025-26", colors[6] + opacity
             )
         );
         layout = default_layout('Milk Price [NZD/kgMS]')
         layout['yaxis']['range'] = [0, 12]
         layout['showlegend'] = false
-        Plotly.plot(fonterra_chart, median_forecasts, layout);
+        Plotly.newPlot(fonterra_chart, median_forecasts, layout);
         charts.push(fonterra_chart)
     })
     /* =========================================================================
         Plot historical GDT events.
     ========================================================================= */
     load_json('gdt_events.json', function(gdt_json) {
-        var gdt_chart = d3.select('#gdt_events_chart').node()
+        var gdt_chart = document.getElementById('gdt_events_chart')
         var layout = default_layout('Price [USD/tonne]')
         layout['hovermode'] = 'compare'
-        Plotly.plot(gdt_chart, [
+        Plotly.newPlot(gdt_chart, [
             default_line_series(gdt_json['date'], gdt_json['amf'], 'AMF'),
             default_line_series(gdt_json['date'], gdt_json['bmp'], 'BMP'),
             default_line_series(gdt_json['date'], gdt_json['but'], 'BUT'),
@@ -399,7 +404,7 @@ function quarterly_fx_rate(hedge_json, key) {
         charts.push(gdt_chart)
     })
     load_json('sales.json', function(gdt_json) {
-        var gdt_chart = d3.select('#gdt_events_quantity_chart').node()
+        var gdt_chart = document.getElementById('gdt_events_quantity_chart')
         var series = []
         var products = ['AMF', 'BMP', 'Butter', 'SMP', 'WMP']
         for (var i = 0; i < products.length; i++) {
@@ -418,7 +423,7 @@ function quarterly_fx_rate(hedge_json, key) {
                 'All products'
             )
         )
-        Plotly.plot(gdt_chart, series, {
+        Plotly.newPlot(gdt_chart, series, {
             hovermode: 'closest',
             yaxis: {
                 title: 'Sales quantity [tonne]',
@@ -442,7 +447,7 @@ function quarterly_fx_rate(hedge_json, key) {
     load_json('fx.json', function(fx_json) {
         load_json('fx_hedge.json', function(hedge_json) {
             load_json('fx_actual.json', function(actual_json) {
-                var fx_chart = d3.select('#fx_chart').node();
+                var fx_chart = document.getElementById('fx_chart');
                 var series = [
                     default_line_series(
                         fx_json.map(x => x['date']),
@@ -454,7 +459,7 @@ function quarterly_fx_rate(hedge_json, key) {
                     quarterly_fx_rate(hedge_json, 'hedge'),
                     quarterly_fx_rate(hedge_json, 'spot')
                 ];
-                Plotly.plot(fx_chart, series, {
+                Plotly.newPlot(fx_chart, series, {
                     hovermode: 'closest',
                     yaxis: {
                         title: 'Exchange rate [NZD:USD]',
