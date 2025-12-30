@@ -1,5 +1,5 @@
 <!--
-#  Copyright 2015-2023, Oscar Dowson.
+#  Copyright 2015-2026, Oscar Dowson.
 #
 #  This Source Code Form is subject to the terms of the Mozilla Public
 #  License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -123,38 +123,31 @@
                     shaded band.
                 </p>
                 <div id="forecast_chart"></div>
-                <h5>GlobalDairyTrade Results</h5>
+                <h5>GlobalDairyTrade Prices</h5>
                 <p class="subtitle">
                     We use auction results from
                     <a href="https://www.globaldairytrade.info/en/product-results/">GlobalDairyTrade</a>
                     to help forecast the milk price.
                 </p>
-                <ul class="tabs" id="globaldairytrade_tabs">
-                    <li class="tab col s2"><a class="active light-blue-text text-darken-4" href="#globaldairytrade_prices">Prices</a></li>
-                    <li class="tab col s2"><a class="light-blue-text text-darken-4" href="#globaldairytrade_quantities">Quantities</a></li>
-                </ul>
-                <div id="globaldairytrade_prices">
-                    <p class="subtitle">
-                        The prices below are not identical to those published by
-                        GlobalDairyTrade; in auctions where the product was not
-                        sold, or the price was not published, we have
-                        <a href="https://en.wikipedia.org/wiki/Imputation_(statistics)">imputed</a>
-                        a value.
-                    </p>
-                    <div id="gdt_events_chart"></div>
-                </div>
-                <div id="globaldairytrade_quantities">
-                    <p class="subtitle">
-                        The chart below presents a 12 month rolling average of
-                        volume of product sold across the five categories we
-                        measure, as well as an unsmoothed trace of the quantity
-                        of all products sold. We don't find that the sales
-                        quantity has a predictive impact on the final price, but
-                        it is useful to demonstrate the strong seasonality in
-                        the market.
-                    </p>
-                    <div id="gdt_events_quantity_chart"></div>
-                </div>
+                <p class="subtitle">
+                    The prices below are not identical to those published by
+                    GlobalDairyTrade; in auctions where the product was not
+                    sold, or the price was not published, we have
+                    <a href="https://en.wikipedia.org/wiki/Imputation_(statistics)">imputed</a>
+                    a value.
+                </p>
+                <div id="gdt_events_chart"></div>
+                <h5>GlobalDairyTrade Quantities</h5>
+                <p class="subtitle">
+                    The chart below presents a 12 month rolling average of
+                    volume of product sold across the five categories we
+                    measure, as well as an unsmoothed trace of the quantity
+                    of all products sold. We don't find that the sales
+                    quantity has a predictive impact on the final price, but
+                    it is useful to demonstrate the strong seasonality in
+                    the market.
+                </p>
+                <div id="gdt_events_quantity_chart"></div>
                 <h5>Foreign exchange rate</h5>
                 <p class="subtitle">
                     We use the hedged and spot USD:NZD FX rates claimed by
@@ -180,25 +173,25 @@
                     2017/18 season.
                 </p>
                 <ul class="tabs" id="forecast_tabs">
-                    <li class="tab col s4"><a class="light-blue-text text-darken-4" href="#forecast_2016_17_chart">16/17</a></li>
-                    <li class="tab col s4"><a class="light-blue-text text-darken-4" href="#forecast_2017_18_chart">17/18</a></li>
-                    <li class="tab col s4"><a class="light-blue-text text-darken-4" href="#forecast_2018_19_chart">18/19</a></li>
-                    <li class="tab col s4"><a class="light-blue-text text-darken-4" href="#forecast_2019_20_chart">19/20</a></li>
-                    <li class="tab col s4"><a class="light-blue-text text-darken-4" href="#forecast_2020_21_chart">20/21</a></li>
-                    <li class="tab col s4"><a class="light-blue-text text-darken-4" href="#forecast_2021_22_chart">21/22</a></li>
-                    <li class="tab col s4"><a class="light-blue-text text-darken-4" href="#forecast_2022_23_chart">22/23</a></li>
-                    <li class="tab col s4"><a class="light-blue-text text-darken-4" href="#forecast_2023_24_chart">23/24</a></li>
                     <li class="tab col s4"><a class="active light-blue-text text-darken-4" href="#forecast_2024_25_chart">24/25</a></li>
+                    <li class="tab col s4"><a class="light-blue-text text-darken-4" href="#forecast_2023_24_chart">23/24</a></li>
+                    <li class="tab col s4"><a class="light-blue-text text-darken-4" href="#forecast_2022_23_chart">22/23</a></li>
+                    <li class="tab col s4"><a class="light-blue-text text-darken-4" href="#forecast_2021_22_chart">21/22</a></li>
+                    <li class="tab col s4"><a class="light-blue-text text-darken-4" href="#forecast_2020_21_chart">20/21</a></li>
+                    <li class="tab col s4"><a class="light-blue-text text-darken-4" href="#forecast_2019_20_chart">19/20</a></li>
+                    <li class="tab col s4"><a class="light-blue-text text-darken-4" href="#forecast_2018_19_chart">18/19</a></li>
+                    <li class="tab col s4"><a class="light-blue-text text-darken-4" href="#forecast_2017_18_chart">17/18</a></li>
+                    <li class="tab col s4"><a class="light-blue-text text-darken-4" href="#forecast_2016_17_chart">16/17</a></li>
                 </ul>
-                <div id="forecast_2016_17_chart"></div>
-                <div id="forecast_2017_18_chart"></div>
-                <div id="forecast_2018_19_chart"></div>
-                <div id="forecast_2019_20_chart"></div>
-                <div id="forecast_2020_21_chart"></div>
-                <div id="forecast_2021_22_chart"></div>
-                <div id="forecast_2022_23_chart"></div>
-                <div id="forecast_2023_24_chart"></div>
                 <div id="forecast_2024_25_chart"></div>
+                <div id="forecast_2023_24_chart"></div>
+                <div id="forecast_2022_23_chart"></div>
+                <div id="forecast_2021_22_chart"></div>
+                <div id="forecast_2020_21_chart"></div>
+                <div id="forecast_2019_20_chart"></div>
+                <div id="forecast_2018_19_chart"></div>
+                <div id="forecast_2017_18_chart"></div>
+                <div id="forecast_2016_17_chart"></div>
                 <div class="divider"></div>
                 <p class="subtitle mono">
                     Having trouble or got some suggestions? Send an email to

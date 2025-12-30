@@ -1,6 +1,6 @@
 dairy-analytics is licensed under the Mozilla Public License, Version 2.0.
 
-Copyright (c) 2015-2023: Oscar Dowson.
+Copyright (c) 2015-2026: Oscar Dowson.
 
 Mozilla Public License Version 2.0
 ==================================

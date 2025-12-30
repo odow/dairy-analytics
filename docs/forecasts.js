@@ -1,4 +1,4 @@
-//  Copyright 2015-2023, Oscar Dowson.
+//  Copyright 2015-2026, Oscar Dowson.
 //
 //  This Source Code Form is subject to the terms of the Mozilla Public
 //  License, v. 2.0. If a copy of the MPL was not distributed with this
@@ -8,13 +8,6 @@ M.Tabs.init(
     document.getElementById("forecast_tabs"),
     {onShow: chart => Plotly.Plots.resize(chart)},
 );
-
-M.Tabs.init(
-    document.getElementById("globaldairytrade_tabs"),
-    {onShow: arg => Plotly.Plots.resize(arg.children[1])},
-);
-
-var d3 = Plotly.d3;
 
 function load_json(filename, callback) {
     var xml_request = new XMLHttpRequest();
@@ -208,7 +201,7 @@ function default_layout(y_axis_title) {
     return {
         hovermode: 'closest',
         yaxis: {
-            title: y_axis_title,
+            title: {text: y_axis_title},
             tickprefix: "$",
             titlefont: {
                 family: 'Verdana, National, sans-serif',
@@ -426,7 +419,7 @@ function quarterly_fx_rate(hedge_json, key) {
         Plotly.newPlot(gdt_chart, series, {
             hovermode: 'closest',
             yaxis: {
-                title: 'Sales quantity [tonne]',
+                title: {text: 'Sales quantity [tonne]'},
                 titlefont: {
                     family: 'Verdana, National, sans-serif',
                 },
@@ -462,7 +455,7 @@ function quarterly_fx_rate(hedge_json, key) {
                 Plotly.newPlot(fx_chart, series, {
                     hovermode: 'closest',
                     yaxis: {
-                        title: 'Exchange rate [NZD:USD]',
+                        title: {text: 'Exchange rate [NZD:USD]'},
                         titlefont: {
                             family: 'Verdana, National, sans-serif',
                         }
