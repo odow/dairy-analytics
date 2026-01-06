@@ -404,5 +404,34 @@
         }
       ]
     }
+  },
+  {
+    "date": "2026-01-06",
+    "model_version": 1,
+    "10%": 9.2,
+    "20%": 9.34,
+    "30%": 9.47,
+    "40%": 9.57,
+    "50%": 9.67,
+    "60%": 9.76,
+    "70%": 9.86,
+    "80%": 9.98,
+    "90%": 10.16,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.58,
+          "fx_max": 0.61,
+          "cost_min": 2.1,
+          "cost_max": 2.6,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
   }
 ]
