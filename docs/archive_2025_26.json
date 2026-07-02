@@ -1,0 +1,698 @@
+[
+  {
+    "date": "2025-05-30",
+    "model_version": 1,
+    "10%": 8.45,
+    "20%": 8.95,
+    "30%": 9.4,
+    "40%": 9.65,
+    "50%": 9.89,
+    "60%": 10.24,
+    "70%": 10.52,
+    "80%": 10.98,
+    "90%": 11.6,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.57,
+          "fx_max": 0.61,
+          "cost_min": 2.0,
+          "cost_max": 2.5,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  },
+  {
+    "date": "2025-06-17",
+    "model_version": 1,
+    "10%": 8.47,
+    "20%": 8.95,
+    "30%": 9.22,
+    "40%": 9.61,
+    "50%": 9.91,
+    "60%": 10.19,
+    "70%": 10.58,
+    "80%": 11.01,
+    "90%": 11.63,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.57,
+          "fx_max": 0.61,
+          "cost_min": 2.0,
+          "cost_max": 2.5,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  },
+  {
+    "date": "2025-07-01",
+    "model_version": 1,
+    "10%": 8.51,
+    "20%": 8.92,
+    "30%": 9.3,
+    "40%": 9.57,
+    "50%": 9.87,
+    "60%": 10.12,
+    "70%": 10.43,
+    "80%": 10.76,
+    "90%": 11.31,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.57,
+          "fx_max": 0.61,
+          "cost_min": 2.0,
+          "cost_max": 2.5,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  },
+  {
+    "date": "2025-07-15",
+    "model_version": 1,
+    "10%": 8.99,
+    "20%": 9.45,
+    "30%": 9.77,
+    "40%": 10.05,
+    "50%": 10.32,
+    "60%": 10.6,
+    "70%": 10.9,
+    "80%": 11.25,
+    "90%": 11.7,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.57,
+          "fx_max": 0.61,
+          "cost_min": 2.0,
+          "cost_max": 2.5,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  },
+  {
+    "date": "2025-08-05",
+    "model_version": 1,
+    "10%": 9.1,
+    "20%": 9.49,
+    "30%": 9.82,
+    "40%": 10.07,
+    "50%": 10.31,
+    "60%": 10.53,
+    "70%": 10.77,
+    "80%": 11.15,
+    "90%": 11.69,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.57,
+          "fx_max": 0.61,
+          "cost_min": 2.0,
+          "cost_max": 2.5,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  },
+  {
+    "date": "2025-08-19",
+    "model_version": 1,
+    "10%": 9.18,
+    "20%": 9.58,
+    "30%": 9.88,
+    "40%": 10.14,
+    "50%": 10.34,
+    "60%": 10.54,
+    "70%": 10.81,
+    "80%": 11.13,
+    "90%": 11.61,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.57,
+          "fx_max": 0.61,
+          "cost_min": 2.0,
+          "cost_max": 2.5,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  },
+  {
+    "date": "2025-09-02",
+    "model_version": 1,
+    "10%": 8.9,
+    "20%": 9.24,
+    "30%": 9.5,
+    "40%": 9.7,
+    "50%": 9.92,
+    "60%": 10.11,
+    "70%": 10.34,
+    "80%": 10.63,
+    "90%": 11.06,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.57,
+          "fx_max": 0.61,
+          "cost_min": 2.0,
+          "cost_max": 2.5,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  },
+  {
+    "date": "2025-09-16",
+    "model_version": 1,
+    "10%": 9.2,
+    "20%": 9.47,
+    "30%": 9.72,
+    "40%": 9.92,
+    "50%": 10.13,
+    "60%": 10.31,
+    "70%": 10.54,
+    "80%": 10.82,
+    "90%": 11.18,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.57,
+          "fx_max": 0.61,
+          "cost_min": 2.0,
+          "cost_max": 2.5,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  },
+  {
+    "date": "2025-10-07",
+    "model_version": 1,
+    "10%": 9.2,
+    "20%": 9.46,
+    "30%": 9.68,
+    "40%": 9.85,
+    "50%": 10.05,
+    "60%": 10.25,
+    "70%": 10.47,
+    "80%": 10.71,
+    "90%": 10.96,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.57,
+          "fx_max": 0.61,
+          "cost_min": 2.0,
+          "cost_max": 2.5,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  },
+  {
+    "date": "2025-10-21",
+    "model_version": 1,
+    "10%": 9.33,
+    "20%": 9.6,
+    "30%": 9.79,
+    "40%": 9.98,
+    "50%": 10.15,
+    "60%": 10.31,
+    "70%": 10.48,
+    "80%": 10.7,
+    "90%": 11.0,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.57,
+          "fx_max": 0.61,
+          "cost_min": 2.0,
+          "cost_max": 2.5,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  },
+  {
+    "date": "2025-11-04",
+    "model_version": 1,
+    "10%": 9.28,
+    "20%": 9.5,
+    "30%": 9.68,
+    "40%": 9.84,
+    "50%": 9.99,
+    "60%": 10.16,
+    "70%": 10.33,
+    "80%": 10.5,
+    "90%": 10.81,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.57,
+          "fx_max": 0.61,
+          "cost_min": 2.0,
+          "cost_max": 2.5,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  },
+  {
+    "date": "2025-11-18",
+    "model_version": 1,
+    "10%": 9.19,
+    "20%": 9.42,
+    "30%": 9.54,
+    "40%": 9.7,
+    "50%": 9.81,
+    "60%": 9.97,
+    "70%": 10.13,
+    "80%": 10.3,
+    "90%": 10.56,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.57,
+          "fx_max": 0.61,
+          "cost_min": 2.0,
+          "cost_max": 2.5,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  },
+  {
+    "date": "2025-12-02",
+    "model_version": 1,
+    "10%": 8.88,
+    "20%": 9.11,
+    "30%": 9.26,
+    "40%": 9.4,
+    "50%": 9.53,
+    "60%": 9.64,
+    "70%": 9.77,
+    "80%": 9.92,
+    "90%": 10.17,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.57,
+          "fx_max": 0.61,
+          "cost_min": 2.0,
+          "cost_max": 2.5,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  },
+  {
+    "date": "2025-12-18",
+    "model_version": 1,
+    "10%": 8.77,
+    "20%": 8.9,
+    "30%": 9.03,
+    "40%": 9.16,
+    "50%": 9.25,
+    "60%": 9.35,
+    "70%": 9.47,
+    "80%": 9.61,
+    "90%": 9.82,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.58,
+          "fx_max": 0.61,
+          "cost_min": 2.1,
+          "cost_max": 2.6,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-01-06",
+    "model_version": 1,
+    "10%": 9.2,
+    "20%": 9.34,
+    "30%": 9.47,
+    "40%": 9.57,
+    "50%": 9.67,
+    "60%": 9.76,
+    "70%": 9.86,
+    "80%": 9.98,
+    "90%": 10.16,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.58,
+          "fx_max": 0.61,
+          "cost_min": 2.1,
+          "cost_max": 2.6,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-01-20",
+    "model_version": 1,
+    "10%": 9.19,
+    "20%": 9.34,
+    "30%": 9.44,
+    "40%": 9.52,
+    "50%": 9.6,
+    "60%": 9.69,
+    "70%": 9.8,
+    "80%": 9.93,
+    "90%": 10.06,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.58,
+          "fx_max": 0.61,
+          "cost_min": 2.1,
+          "cost_max": 2.6,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-02-10",
+    "model_version": 1,
+    "10%": 9.51,
+    "20%": 9.63,
+    "30%": 9.73,
+    "40%": 9.82,
+    "50%": 9.89,
+    "60%": 10.0,
+    "70%": 10.08,
+    "80%": 10.18,
+    "90%": 10.33,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.58,
+          "fx_max": 0.61,
+          "cost_min": 2.1,
+          "cost_max": 2.6,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-02-17",
+    "model_version": 1,
+    "10%": 9.57,
+    "20%": 9.71,
+    "30%": 9.8,
+    "40%": 9.89,
+    "50%": 9.97,
+    "60%": 10.05,
+    "70%": 10.14,
+    "80%": 10.26,
+    "90%": 10.41,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.58,
+          "fx_max": 0.61,
+          "cost_min": 2.1,
+          "cost_max": 2.6,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-03-03",
+    "model_version": 1,
+    "10%": 9.72,
+    "20%": 9.84,
+    "30%": 9.94,
+    "40%": 10.01,
+    "50%": 10.09,
+    "60%": 10.15,
+    "70%": 10.23,
+    "80%": 10.32,
+    "90%": 10.44,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.58,
+          "fx_max": 0.61,
+          "cost_min": 2.1,
+          "cost_max": 2.6,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-03-17",
+    "model_version": 1,
+    "10%": 9.7,
+    "20%": 9.81,
+    "30%": 9.9,
+    "40%": 9.95,
+    "50%": 10.01,
+    "60%": 10.1,
+    "70%": 10.17,
+    "80%": 10.27,
+    "90%": 10.41,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.58,
+          "fx_max": 0.61,
+          "cost_min": 2.1,
+          "cost_max": 2.6,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-04-07",
+    "model_version": 1,
+    "10%": 9.61,
+    "20%": 9.74,
+    "30%": 9.82,
+    "40%": 9.88,
+    "50%": 9.95,
+    "60%": 10.0,
+    "70%": 10.07,
+    "80%": 10.15,
+    "90%": 10.28,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.58,
+          "fx_max": 0.61,
+          "cost_min": 2.1,
+          "cost_max": 2.6,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-04-21",
+    "model_version": 1,
+    "10%": 9.6,
+    "20%": 9.71,
+    "30%": 9.79,
+    "40%": 9.85,
+    "50%": 9.92,
+    "60%": 9.99,
+    "70%": 10.06,
+    "80%": 10.15,
+    "90%": 10.27,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.58,
+          "fx_max": 0.61,
+          "cost_min": 2.1,
+          "cost_max": 2.6,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-05-05",
+    "model_version": 1,
+    "10%": 9.63,
+    "20%": 9.73,
+    "30%": 9.8,
+    "40%": 9.87,
+    "50%": 9.93,
+    "60%": 9.99,
+    "70%": 10.06,
+    "80%": 10.13,
+    "90%": 10.25,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.58,
+          "fx_max": 0.61,
+          "cost_min": 2.1,
+          "cost_max": 2.6,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  },
+  {
+    "date": "2026-05-19",
+    "model_version": 1,
+    "10%": 9.64,
+    "20%": 9.75,
+    "30%": 9.82,
+    "40%": 9.89,
+    "50%": 9.96,
+    "60%": 10.02,
+    "70%": 10.09,
+    "80%": 10.17,
+    "90%": 10.28,
+    "config": {
+      "num_simulations": 1000,
+      "current_season": "2025",
+      "start_date": "2025-05-01",
+      "estimates": [
+        {
+          "fx_min": 0.58,
+          "fx_max": 0.61,
+          "cost_min": 2.1,
+          "cost_max": 2.6,
+          "default_prior": 7.5,
+          "default_prior_weight": 0.0,
+          "date": "2025-05-29"
+        }
+      ]
+    }
+  }
+]
